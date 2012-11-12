@@ -2,34 +2,27 @@ require 'spec_helper'
 
 describe "StaticPages" do
 
+subject { page }
+
   describe "Home Page" do
 
-    it "Should have the content 'Sample App'" do
-      visit '/static_pages/home'
-      page.should have_selector('h1', text: 'Sample App')
-    end
+    before { visit root_path }
 
-    it "Should have the correct title" do
-      visit '/static_pages/home'
-      page.should have_selector('title', text: 'Ruby on Rails Tutorial')
-    end
-
-    it "Should not have a custom title" do
-      visit '/static_pages/home'
-      page.should_not have_selector('title', text: '| Home')
-    end
-
+    it { should have_selector('h1', text: 'Sample App') }
+    it { should have_selector('title', text: 'Ruby on Rails Tutorial') }
+    it { should_not have_selector('title', text: '| Home') }
+    
   end
 
     describe "Contact Page" do
 
+      before { visit contact_path }
+
     it "Should have the content 'Sample App'" do
-      visit '/static_pages/contact'
       page.should have_selector('h1', text: 'Sample App')
     end
 
-        it "Should have the correct title" do
-      visit '/static_pages/contact'
+    it "Should have the correct title" do
       page.should have_selector('title', text: '| Contact')
     end
 
@@ -37,13 +30,13 @@ describe "StaticPages" do
 
   describe "About Page" do
 
+    before { visit about_path}
+
     it "Should have the content 'Sample App'" do
-      visit '/static_pages/about'
       page.should have_selector('h1', text: 'Sample App')
     end
 
-        it "Should have the correct title" do
-      visit '/static_pages/about'
+    it "Should have the correct title" do
       page.should have_selector('title', text: '| About')
     end
 
@@ -51,13 +44,13 @@ describe "StaticPages" do
 
   describe "Help Page" do
 
+    before { visit help_path }
+
     it "Should have the content 'Sample App'" do
-      visit '/static_pages/help'
       page.should have_selector('h1', text: 'Sample App')
     end
 
-        it "Should have the correct title" do
-      visit '/static_pages/help'
+    it "Should have the correct title" do
       page.should have_selector('title', text: '| Help')
     end
 

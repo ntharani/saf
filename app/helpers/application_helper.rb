@@ -10,4 +10,9 @@ module ApplicationHelper
       "#{base_title}  | #{page_title}"
     end
   end
+
+  def is_active()
+  end
+
+
 end
