@@ -1,6 +1,6 @@
 Saf::Application.routes.draw do
   
-  get "users/new"
+  resources :users
 
   root               to: 'static_pages#home'
 
@@ -10,6 +10,7 @@ Saf::Application.routes.draw do
   match '/contact',  to: 'static_pages#contact'
 
   get "static_pages/bootstrap"
+  get "static_pages/twtest"
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

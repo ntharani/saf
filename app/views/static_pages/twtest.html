@@ -1,11 +1,38 @@
-<%= provide(:title, 'Help') %>
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Javascript · Bootstrap</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <!-- Le styles -->
+
+
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Not Essential, but gives nice look to vertical menu
+    <link href="http://twitter.github.com/bootstrap/assets/css/bootstrap-responsive.css" rel="stylesheet">
+    <link href="http://twitter.github.com/bootstrap/assets/css/docs.css" rel="stylesheet">
+    <link href="1http://twitter.github.com/bootstrap/assets/js/google-code-prettify/prettify.css" rel="stylesheet">
+    -->
+
+
+  </head>
+
+  <body data-spy="scroll" data-target=".bs-docs-sidebar">
+
+
+
   <div class="container">
 
     <!-- Docs nav
     ================================================== -->
     <div class="row">
-      <div class="span3 AAA">
-        <ul class="nav nav-list bs-docs-sidenav" data-spy="affix">
+      <div class="span3 bs-docs-sidebar">
+        <ul class="nav nav-list bs-docs-sidenav">
           <li><a href="#overview"><i class="icon-chevron-right"></i> Overview</a></li>
           <li><a href="#transitions"><i class="icon-chevron-right"></i> Transitions</a></li>
           <li><a href="#modals"><i class="icon-chevron-right"></i> Modal</a></li>
@@ -28,8 +55,6 @@
         <!-- Overview
         ================================================== -->
         <section id="overview">
-          <h1>Sample App</h1>
-
           <p>
             Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
             tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
@@ -848,9 +873,12 @@ $('[data-spy="affix"]').each(function () {
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
     <script type="1text/javascript" src="http://platform.twitter.com/widgets.js"></script>
-
-<!--
+    <script src="http://twitter.github.com/bootstrap/assets/js/jquery.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-scrollspy.js"></script>
+    <script src="http://twitter.github.com/bootstrap/assets/js/bootstrap-affix.js"></script>
     <script src="http://twitter.github.com/bootstrap/assets/js/application.js"></script>
--->
 
 
+
+  </body>
+</html>
