@@ -256,9 +256,10 @@ aside {
   /* Adjust sidenav width */
   .bs-docs-sidenav {
     width: 166px;
-    margin-top: 20px;
+    margin-top: 50px;
   }
   .bs-docs-sidenav.affix {
+    position: static;   
     top: 0;
   }
 }

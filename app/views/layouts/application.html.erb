@@ -26,8 +26,9 @@
   <%=render 'layouts/header' %>
 
   <% flash.each do |key, value| %>
-        <div class="alert alert-<%= key %>"><%= value %></div>
-      <% end %>
+    <%= content_tag(:div, value, class: "alert alert-#{key}") %>
+  <% end %>
+
 
   <%= yield %>
 
