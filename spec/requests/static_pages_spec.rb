@@ -9,51 +9,48 @@ subject { page }
     before { visit root_path }
 
     it { should have_selector('h1', text: 'Sample App') }
-    it { should have_selector('title', text: 'Ruby on Rails Tutorial') }
-    it { should_not have_selector('title', text: '| Home') }
-    
+    it { should have_selector('title', text: full_title('')) }
+    it { should_not have_selector('title', text: '| Home') }  
   end
 
-    describe "Contact Page" do
+  describe "Contact Page" do
 
       before { visit contact_path }
 
-    it "Should have the content 'Sample App'" do
-      page.should have_selector('h1', text: 'Sample App')
-    end
-
-    it "Should have the correct title" do
-      page.should have_selector('title', text: '| Contact')
-    end
-
+      it { should have_selector('h1',     text: 'Contact') }
+      it { should have_selector('title',  text: full_title('Contact')) }
   end
 
   describe "About Page" do
 
     before { visit about_path}
 
-    it "Should have the content 'Sample App'" do
-      page.should have_selector('h1', text: 'Sample App')
-    end
-
-    it "Should have the correct title" do
-      page.should have_selector('title', text: '| About')
-    end
-
+    it { should have_selector('h1',     text: 'Sample App') }
+    it { should have_selector('title',  text: full_title('About')) }
   end
 
   describe "Help Page" do
 
     before { visit help_path }
 
-    it "Should have the content 'Sample App'" do
-      page.should have_selector('h1', text: 'Sample App')
-    end
+    it { should have_selector('h1',     text: 'Sample App') }
+    it { should have_selector('title',  text: full_title('Help')) }
 
-    it "Should have the correct title" do
-      page.should have_selector('title', text: '| Help')
-    end
+  end
 
+  it "should have the right links" do
+
+    visit root_path
+    click_link "About"
+    page.should have_selector 'title', text: 'About'
+    click_link "Contact"
+    page.should have_selector 'title', text: 'Contact'
+    click_link "Help"
+    page.should have_selector 'title', text: 'Help'
+    click_link "Home"
+    click_link "Sign Up Now!"
+    page.should have_selector 'title', text: 'Sign Up'
+    
   end
 
 end
