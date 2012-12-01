@@ -41,6 +41,8 @@ subject { page }
   it "should have the right links" do
 
     visit root_path
+    click_link "Sign in"
+    page.should have_selector 'title', text: 'Sign in'
     click_link "About"
     page.should have_selector 'title', text: 'About'
     click_link "Contact"
