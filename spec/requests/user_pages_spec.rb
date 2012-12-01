@@ -58,12 +58,8 @@ describe "User Pages" do
         before { click_button submit}
         let(:user) { User.find_by_email("user@example.com") }
         it { should have_selector('title', text: user.name) }
-<<<<<<< HEAD
         it { should have_selector('div.alert.alert-success', text: /(Welcome)/) } #Regex Baby! Could have also used ' '
-
-=======
         it { should have_link('Sign out') }
->>>>>>> signin-out
       end
     end  
   end
