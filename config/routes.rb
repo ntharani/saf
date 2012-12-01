@@ -1,16 +1,46 @@
 Saf::Application.routes.draw do
   
   resources :users
+  resources :sessions,  only: [:new, :create, :destroy]
 
   root               to: 'static_pages#home'
-
+  match '/signin',   to: 'sessions#new'
+  match '/signout',  to: 'sessions#destroy', via: :delete
   match '/signup',   to: 'users#new'
   match '/help',     to: 'static_pages#help'
   match '/about',    to: 'static_pages#about'
   match '/contact',  to: 'static_pages#contact'
 
-  get "static_pages/bootstrap"
-  get "static_pages/twtest"
+# Static Pages Controller
+
+# HTTP Request |      URI      | Named Route      |    Action    |  Purpose
+# ------------ | ------------- | ---------------- | ------------ | ----------
+# GET          | /             | root_path        |              |
+# GET          | /about        | about_path       | 
+# GET          | /contact      | contact_path     | 
+# GET          | /help         | help_path        | 
+
+# Users Controller [REST]
+
+# HTTP Request |      URI      | Named Route      |    Action    |  Purpose
+# ------------ | ------------- | ---------------- | ------------ | ----------
+# GET          | /users        | users_path       | index        | List all users
+# GET          | /users/id     | user_path(user)  | show         | Show a user
+# GET          | /users/new    | signup_path      | new          | Signup Form (Also user_new_path)
+# POST         | /users        | users_path       | create       | Create a user object
+# GET          | /users/id     | user_path(user)  | edit         | Show the edit user form
+# PUT          | /users/id/edit| user_path(user)  | update       | Update the user object (Also edit_user_path)
+# DELETE       | /users/       | user_path(user)  | destroy      | Delete the user object
+
+
+# Sessions Controller [REST]
+
+# HTTP Request |      URI      | Named Route      |    Action    |  Purpose
+# ------------ | ------------- | ---------------  | ------------ | ----------
+# GET          | /signin       | signin_path      | new          | Form for session (signin)
+# POST         | /sessions     | sessions_path    | create       | create session
+# DELETE       | /signout      | signout_path     | destroy      | delete session (signout)
+
 
   # The priority is based upon order of creation:
   # first created -> highest priority.
