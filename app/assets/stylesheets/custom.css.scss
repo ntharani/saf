@@ -85,6 +85,16 @@ aside {
   margin-right: 10px;
 }
 
+.gravatar_edit {
+    padding-top: 20px;
+    height: 50px;
+    width: 50px;
+    vertical-align: middle;
+    display: table-cell;
+    margin: auto;
+    text-align: center;
+}
+
 .affix {
   position: fixed;
   top: 20px;
@@ -97,6 +107,23 @@ aside {
   width: 200px;
   height: 400px;
   float: left;
+}
+
+/* UL Styling for lists and pagination 
+--------------------------------------------------*/
+
+.users {
+  list-style: none;
+  margin: 0;
+
+  li {
+    overflow: auto;
+    padding: 10px;
+    border-top: 1px solid $grayLighter;
+    &:last-child {
+      border-bottom: 1px solid $grayLighter;
+    }
+  }
 }
 
 /* Pretty CSS Forms

@@ -28,9 +28,9 @@ Saf::Application.routes.draw do
 # GET          | /users/id     | user_path(user)  | show         | Show a user
 # GET          | /users/new    | signup_path      | new          | Signup Form (Also user_new_path)
 # POST         | /users        | users_path       | create       | Create a user object
-# GET          | /users/id     | user_path(user)  | edit         | Show the edit user form
-# PUT          | /users/id/edit| user_path(user)  | update       | Update the user object (Also edit_user_path)
-# DELETE       | /users/       | user_path(user)  | destroy      | Delete the user object
+# GET          | /users/id/edit| user_path(user)  | edit         | Show the edit user form
+# PUT          | /users/id     | user_path(user)  | update       | Update the user object (Also edit_user_path)
+# DELETE       | /users/id     | user_path(user)  | destroy      | Delete the user object
 
 
 # Sessions Controller [REST]
