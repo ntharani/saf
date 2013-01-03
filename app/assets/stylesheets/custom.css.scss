@@ -299,6 +299,7 @@ aside {
     padding-top: 0;
   }
 
+
   /* Sidenav */
   .bs-docs-sidenav {
     width: auto;
@@ -332,3 +333,19 @@ aside {
 
 }
 
+/* Nagib Test Fixed-Navbar On Mobile
+------------------------- */
+
+
+@media (max-width: 979px) {
+ 
+  .navbar-fixed-top,
+  .navbar-fixed-bottom, .nav-collapse .dropdown-menu {
+    position: fixed;
+    margin-left: -20px;
+    margin-right: -20px;
+    padding-left: 20px;
+    padding-right: 20px;
+
+  }
+}

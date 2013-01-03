@@ -1,7 +1,11 @@
 Saf::Application.routes.draw do
   
+  get "osessions/new"
+
   resources :users
   resources :sessions,  only: [:new, :create, :destroy]
+  resources :osessions, only: [:new, :create, :destroy]
+  resources :opusses,   only: [:index, :new]
 
   root               to: 'static_pages#home'
   match '/signin',   to: 'sessions#new'
@@ -11,6 +15,7 @@ Saf::Application.routes.draw do
   match '/about',    to: 'static_pages#about'
   match '/contact',  to: 'static_pages#contact'
   match '/opuss',    to: 'static_pages#opuss'
+  match '/ologin',   to: 'osessions#new'
 
 # Static Pages Controller
 
