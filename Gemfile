@@ -9,6 +9,7 @@ gem 'will_paginate', '3.0.3'
 gem 'bootstrap-will_paginate', '0.0.6' # Using 0.0.5 in RoR Tut
 gem 'httparty'
 gem 'json'
+gem 'thin'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
