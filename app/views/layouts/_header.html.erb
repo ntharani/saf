@@ -6,19 +6,22 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </a>
-      <a class="brand" href="<%=root_path%>">Opuss</a>
+
+       <a class="brand hidden-phone hidden-tablet" href="<%=root_path%>">Opuss</a> 
+
         <ul class="nav">
           <li class="active"><%= link_to '<i class="icon-book"></i> Feed'.html_safe, root_path %></li>
           <li><a href="<%= root_path %>"><i class="icon-fire"></i> Top</a></li>
           <li><%= link_to '<i class="icon-edit"></i> New'.html_safe, root_path %></li> 
         </ul>
       <div class="nav-collapse">
+
         <ul class="nav">
           <li><%= link_to "Opuss", opuss_path %></li>
         </ul>
         <ul class="nav pull-right">
         <form class="navbar-search pull-left" action="">
-          <input type="text" class="search-query span2" placeholder="Enter category or #hashtag">
+          <input type="text" class="search-query span2" placeholder="Category or #hashtag">
         </form>
 
           <li><%= link_to "Help", help_path %></li>
