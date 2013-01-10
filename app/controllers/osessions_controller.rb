@@ -1,7 +1,4 @@
-require 'rubygems'
 require 'httparty'
-require 'json'
-
 
 class OsessionsController < ApplicationController
 
@@ -16,7 +13,7 @@ class OsessionsController < ApplicationController
   end
 
   def create
-
+    include HTTParty
 
     # On POST success it gets a session token for use with other methods.
     # Signin the user, set a permanent cookie equal to the sessionID.
@@ -28,7 +25,6 @@ class OsessionsController < ApplicationController
     # works in self.author_info.. 
 
     @ouser = HTTParty.get('http://api.opuss.com/author/author.json', :query => {:api_key => API_KEY, :username => 'sb2uk', :session => '79b95801048b74977624fd143c9e9d0e'})
-    render 'index'
   end
 
   def self.author_info
@@ -39,6 +35,13 @@ class OsessionsController < ApplicationController
     feedpublic = get('/feed/public.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31, :output => 'json'})
   end
 
+  def self.feed_author
+    authorfeed = get('feed/author.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :username => 'sb2uk', :limit => 31, :output => 'json'})
+  end
+
+  def self.feed_feed
+    myfeed = get('feed/feed.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31, :output => 'json'})
+  end
 
   def self.diditset
     puts @ouser

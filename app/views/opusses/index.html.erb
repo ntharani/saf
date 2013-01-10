@@ -1,2 +1,9 @@
 <h1>Opusses#Index</h1>
 <p>Find me in app/views/opusses/index.html.erb</p>
+<p> Will format this later.  Likely use Divs to separate sections for User ID, Avatar, Title and Text box with CSS Overflow property for up to 7 lines that itself is a link to the Opuss permalink.  The permalink should be a restful show action. It is! (01:37am..)  Next: Get the login post logic working and display the opuss avatar on index/show</p>
+<ul class="users">
+  <% @opusses["data"].each do |opusses| %>
+    <li>Opuss ID: <%= opusses["opuss_id"]%> Title: <%= opusses["title"]%> By: <%= opusses["author"]["name"]%> | <%= link_to "Opuss", opuss_path(:id => opusses["opuss_id"]) %></li>
+<% end %>
+</ul>
+
