@@ -1,7 +1,7 @@
 require 'httparty'
-require 'opuss_api'
 
 class OpussesController < ApplicationController
+  include OpussApi
 
   # Basic REST Actions..
 
@@ -9,7 +9,11 @@ class OpussesController < ApplicationController
 
     # the Opuss feed =/opusses
     # opusses
-    @opusses = OpussApi.public_feed.parsed_response
+#    if OpussApi.osigned_in?
+      @opusses = OpussApi.public_feed.parsed_response
+#    else
+#      flash[:notice] = 'Please sign in'
+#    end
   end
 
   def show

@@ -1,6 +1,6 @@
 require 'httparty'
 
-class OpussApi
+module OpussApi
 
 include HTTParty
 
@@ -23,11 +23,11 @@ include HTTParty
   ####### Relevant to Opusses Controller 
 
   def self.public_feed
-    get('/feed/public.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31})
+    get('/feed/public.json', :query => {:session => @session_token, :limit => 31})
   end
 
   def self.show_opuss(opuss)
-    get('/opuss/opuss.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :opuss_id => opuss})
+    get('/opuss/opuss.json', :query => {:session => @session_token, :opuss_id => opuss})
   end
 
   def self.create_opuss
@@ -38,5 +38,45 @@ include HTTParty
 
   def self.destroy_opuss
   end
+
+  def self.osigned_in?
+    if @author_login["error_code"].to_s !="200"
+      flash.now["Please login"]
+      render 'ologin_path'
+    else
+      flash["yep"]
+      puts "The user is logged in"
+      return 
+    end
+  end
+
+  def self.logon(username, password)
+    # if you login twice, the Api will automatically invalidate the last session_token.
+    create_device_token
+    @author_login = post('/session/logon.json', :body => {:username => username, :password => password, :device_token => @device_token})
+    puts "The error/success code is #{@author_login["error_code"]}"
+    if @author_login["error_code"].to_s !="200"
+      puts "It's not sucessful!!!!"
+    else
+      puts "Yeah! it was successful #{@author_login["error_code"]}"
+      puts @author_login["data"]["author"]["name"]
+      puts "This is the session token"
+      @session_token = @author_login["data"]["session_token"]
+      puts @session_token
+    end
+      return @author_login
+  end
+
+  def self.logoff
+    post('/session/logoff.json', :body => {:session => @session_token})
+  end
+
+  private
+
+  def self.create_device_token
+    #Eg: The identifier to the service, a random string, although tested with hard-coding "WebApp"
+    @device_token = SecureRandom.urlsafe_base64
+  end
+
 
 end

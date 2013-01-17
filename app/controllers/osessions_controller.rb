@@ -1,57 +1,47 @@
-require 'httparty'
-
 class OsessionsController < ApplicationController
-
-  include HTTParty
-  default_params :api_key => 'gHy7sX007Vv'
-  API_KEY = 'gHy7sX007Vv'
-  base_uri 'http://api.opuss.com'
-  format :json
+include OpussApi
 
   def new
     # The associated form caputures the osession data: Opuss Username, Password
   end
 
   def create
-    include HTTParty
-
-    # On POST success it gets a session token for use with other methods.
+    # On POST we take the form capture data from the #NEW action.
+    # On success it gets a session token for use with other methods.
     # Signin the user, set a permanent cookie equal to the sessionID.
     # This sessionID is valid until explicitly torn down. 
-    # Holy shit.. this crap makes sense..... mostly
+    # Holy shit.. this crap makes sense.....
 
-    # Can't refactor base_uri out, it's a method, but doesn't work on a create action?
-    # Same with the default_params :api_key, nada - has to be explictly stated, but only here.
-    # works in self.author_info.. 
+     puts "EXECUTE THIS CODE!!!"
+     puts params.inspect
+     puts "In the OSessions Controller now"
+#     osignin(params[:osession][:username],params[:osession][:password])
+    @author = OpussApi.logon(params[:osession][:username],params[:osession][:password])
+    puts "Back in the Osessions controller"
+    puts "Here: #{@author}"
+    puts "#{@author["error_code"]} "
+    puts "Did anything print or does being back mean I have no access to it?"
+    if @author["error_code"].to_s !="200"
+      flash.now[:error] = 'Invalid username or password'
+      render 'new'
+#      osign_in(@author["data"]["
+    else
+      flash[:success] = "Welcome to Opuss!"
+      redirect_to '/opusses'
+    end
+#      puts "The session_token was nil, the user has been logged in now"
+#    else
+#      puts "A session exists, here's proof"
+      #puts @session_token
+#    end
 
-    @ouser = HTTParty.get('http://api.opuss.com/author/author.json', :query => {:api_key => API_KEY, :username => 'sb2uk', :session => '79b95801048b74977624fd143c9e9d0e'})
+
   end
-
-  def self.author_info
-    @ouser = get('/author/author.json', :query => {:username => 'sb2uk', :session => '79b95801048b74977624fd143c9e9d0e', :output => 'json'})
-  end
-
-  def self.feed_public
-    feedpublic = get('/feed/public.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31, :output => 'json'})
-  end
-
-  def self.feed_author
-    authorfeed = get('feed/author.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :username => 'sb2uk', :limit => 31, :output => 'json'})
-  end
-
-  def self.feed_feed
-    myfeed = get('feed/feed.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31, :output => 'json'})
-  end
-
-  def self.diditset
-    puts @ouser
-  end
-
 
   def destroy
+    OpussApi.logoff
+    flash[:notice] = 'You have been logged off'
+    redirect_to root_url
   end
 
 end
-
-# /author/author.json?api_key=gHy7sX007Vv&username=sb2uk&session=79b95801048b74977624fd143c9e9d0e
-

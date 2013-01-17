@@ -13,6 +13,7 @@ Saf::Application.routes.draw do
   match '/about',    to: 'static_pages#about'
   match '/contact',  to: 'static_pages#contact'
   match '/ologin',   to: 'osessions#new'
+  match '/osignout', to: 'osessions#destroy', via: :delete
 
 # Static Pages Controller
 
