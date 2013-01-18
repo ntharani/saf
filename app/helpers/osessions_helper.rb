@@ -18,9 +18,8 @@ module OsessionsHelper
   def osign_out
 #    self.ocurrent_user = nil
     OpussApi.logoff
-    flash[:notice] = 'You have been logged off'
-    redirect_to root_url
     cookies.delete(:opuss_token)
+    flash[:notice] = 'See you soon!'
     puts "I have deleted the cookie, the value is now #{cookies[:opuss_token]}"
   end
 

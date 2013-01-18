@@ -23,6 +23,7 @@ module SessionsHelper
   def sign_out
     self.current_user = nil
     cookies.delete(:remember_token)
+    flash[:notice] = 'You have been logged off RoR Tutorial'
   end
 
   def store_location

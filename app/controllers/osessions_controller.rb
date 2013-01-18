@@ -30,7 +30,7 @@ include OpussApi
 #      osign_in(@author["data"]["
     else
       flash[:success] = "Welcome to Opuss!"
-      redirect_to '/opusses'
+      redirect_back_or '/opusses'
     end
 #      puts "The session_token was nil, the user has been logged in now"
 #    else
@@ -43,6 +43,7 @@ include OpussApi
 
   def destroy
     osign_out
+    redirect_to root_url
   end
 
 end

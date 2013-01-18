@@ -1,7 +1,7 @@
 require 'httparty'
 
 class OpussesController < ApplicationController
-  before_filter :signed_in_user,  only: [:index, :edit, :update]
+  before_filter :osigned_in_user,  only: [:index]
   include OpussApi
 
   # Basic REST Actions..
@@ -67,12 +67,12 @@ class OpussesController < ApplicationController
 
   private
 
-    def signed_in_user
+    def osigned_in_user
       #Debug Tip: Test if signedin by raising an exception..
       #raise signed_in?.inspect
       unless osigned_in?
         store_location
-        redirect_to new_osession_path, notice: "Please sign in." 
+        redirect_to new_osession_path, notice: "Please sign in first." 
       end
     end
 
