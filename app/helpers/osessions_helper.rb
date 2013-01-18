@@ -1,41 +1,27 @@
 module OsessionsHelper
 
   def osign_in(username, password)
-   @author = OpussApi.logon(params[:osession][:username],params[:osession][:password])
-
-    cookies.permanent[:opuss_token] = ostoken
-    self.ocurrent_user = user
+    puts "In the Osessions Helper now"
+    @response = OpussApi.logon(params[:osession][:username],params[:osession][:password])
+    cookies.permanent[:opuss_token] = @response["data"]["session_token"]
+    puts "Just assigned a cookie"
+    puts "the cookie value is #{cookies[:opuss_token]}"
+    #self.ocurrent_user = cookies.permanent[:opuss_token]
+    return @response
   end
 
-  def signed_in?
-    !ocurrent_user.nil?
+  def osigned_in?
+    !cookies[:opuss_token].nil?
   end
 
-  def ocurrent_user=(user)
-    @ocurrent_user = user
-  end
-
-  def ocurrent_user
-    @ocurrent_user ||= User.find_by_remember_token(cookies[:remember_token])
-  end
-
-  def ocurrent_user?(user)
-    user == current_user
-  end
-
+  
   def osign_out
-    self.ocurrent_user = nil
+#    self.ocurrent_user = nil
+    OpussApi.logoff
+    flash[:notice] = 'You have been logged off'
+    redirect_to root_url
     cookies.delete(:opuss_token)
-  end
-
-  def ostore_location
-    session[:return_to] = request.fullpath
-  end
-
-  def oredirect_back_or(default)
-    redirect_to(session[:return_to] || default)
-    #NB Redirect should typically be the last thing in a branch.  In rails the redirect will not execute straight away
-    session.delete(:return_to)
+    puts "I have deleted the cookie, the value is now #{cookies[:opuss_token]}"
   end
 
 end

@@ -1,6 +1,7 @@
 require 'httparty'
 
 class OpussesController < ApplicationController
+  before_filter :signed_in_user,  only: [:index, :edit, :update]
   include OpussApi
 
   # Basic REST Actions..
@@ -9,10 +10,15 @@ class OpussesController < ApplicationController
 
     # the Opuss feed =/opusses
     # opusses
-#    if OpussApi.osigned_in?
+    puts "I'm in the OpussesController"
+#      if osigned_in?
+#      puts "Yes Signed In"
+#      puts "the cookie value is #{cookies[:opuss_token]}"
       @opusses = OpussApi.public_feed.parsed_response
 #    else
+#      puts "Not not signed in"
 #      flash[:notice] = 'Please sign in'
+#      render 'new'
 #    end
   end
 
@@ -59,15 +65,16 @@ class OpussesController < ApplicationController
   # Search: Find_by (Category or Hashtag)
   # Show Categories and View Those (eg: Everything, Jokes etc.)
 
-  private 
+  private
 
-  # Setup Opuss API HTTParty bits here inc. shared variables.  Eventually should probably define this in a shared library for other controllers
-
-#  include httparty
-  API_KEY = 'gHy7sX007Vv'
-#  default_params :api_key => 'gHy7sX007Vv'
-#  base_uri 'http://api.opuss.com'
-#  format :json
+    def signed_in_user
+      #Debug Tip: Test if signedin by raising an exception..
+      #raise signed_in?.inspect
+      unless osigned_in?
+        store_location
+        redirect_to new_osession_path, notice: "Please sign in." 
+      end
+    end
 
 
 end

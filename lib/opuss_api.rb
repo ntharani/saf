@@ -39,16 +39,6 @@ include HTTParty
   def self.destroy_opuss
   end
 
-  def self.osigned_in?
-    if @author_login["error_code"].to_s !="200"
-      flash.now["Please login"]
-      render 'ologin_path'
-    else
-      flash["yep"]
-      puts "The user is logged in"
-      return 
-    end
-  end
 
   def self.logon(username, password)
     # if you login twice, the Api will automatically invalidate the last session_token.

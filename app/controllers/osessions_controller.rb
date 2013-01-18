@@ -15,8 +15,11 @@ include OpussApi
      puts "EXECUTE THIS CODE!!!"
      puts params.inspect
      puts "In the OSessions Controller now"
-#     osignin(params[:osession][:username],params[:osession][:password])
-    @author = OpussApi.logon(params[:osession][:username],params[:osession][:password])
+     # Check to see if the user has a cookie already.  Posting to this will automatically invalidate the last sessionID.
+
+    #Sign in the User.
+    @author = osign_in(params[:osession][:username],params[:osession][:password])
+#    @author = OpussApi.logon(params[:osession][:username],params[:osession][:password])
     puts "Back in the Osessions controller"
     puts "Here: #{@author}"
     puts "#{@author["error_code"]} "
@@ -39,9 +42,7 @@ include OpussApi
   end
 
   def destroy
-    OpussApi.logoff
-    flash[:notice] = 'You have been logged off'
-    redirect_to root_url
+    osign_out
   end
 
 end
