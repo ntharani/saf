@@ -3,7 +3,7 @@
 <p> Format later.  Use divs to separate sections for User ID, Avatar, Title and Text box with CSS Overflow property for up to 7 lines that itself is a link to the Opuss permalink.</p>
 <ul class="users">
   <% @opusses["data"].each do |opusses| %>
-    <li><%= link_to opusses["title"], opuss_path(:id => opusses["opuss_id"]) %> By: <%= opusses["author"]["name"]%> <%= distance_of_time_in_words(opusses["created"], Time.now.utc)%> ago</li>
+    <li><%= image_tag(opusses["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "32x32") %> <%= link_to opusses["title"], opuss_path(:id => opusses["opuss_id"]) %> By: <%= opusses["author"]["name"]%> <%= distance_of_time_in_words(opusses["created"], Time.now.utc)%> ago</li>
 <% end %>
 </ul>
 
