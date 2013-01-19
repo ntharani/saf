@@ -39,6 +39,25 @@ include HTTParty
   def self.destroy_opuss
   end
 
+  def self.osigned_in?
+    puts "Am I signed in? Heres my session token: #{@session_token}"
+    puts "Here is the cookie I set locally #{cookies[:opuss_token]}"
+    puts "have now called the method ogetcookie"
+    #new_token = OsessionsHelper.ggg
+    #puts "ogetcookie returned new_token = #{new_token}"    
+    return @session_token
+  end
+
+  def self.osign_out
+    cookies.delete(:opuss_token)
+    puts "About to delete the cookie, the value is: #{cookies[:opuss_token]}"
+    logoff
+    cookies.delete(:opuss_token)
+    puts "I have deleted the cookie, the value is now #{cookies[:opuss_token]}"
+    @session_token = nil
+    return @session_token
+  end
+
 
   def self.logon(username, password)
     # if you login twice, the Api will automatically invalidate the last session_token.
@@ -52,6 +71,7 @@ include HTTParty
       puts @author_login["data"]["author"]["name"]
       puts "This is the session token"
       @session_token = @author_login["data"]["session_token"]
+      set_token(@session_token)
       puts @session_token
     end
       return @author_login
@@ -66,6 +86,12 @@ include HTTParty
   def self.create_device_token
     #Eg: The identifier to the service, a random string, although tested with hard-coding "WebApp"
     @device_token = SecureRandom.urlsafe_base64
+  end
+
+  def self.set_token(token)
+#    cookies.permanent.signed[:opuss_token] = token
+#    This method fails! (I tried setting cookies in a helper which works, but visibility is lost back here.)
+#    I tried to namespace call it and that failed as well, am I missing something?
   end
 
 

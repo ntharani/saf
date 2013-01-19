@@ -1,6 +1,10 @@
 module OsessionsHelper
 
-  def osign_in(username, password)
+  def ggg
+    return cookies[:opuss_token]
+  end
+
+  def xxosign_in(username, password)
     puts "In the Osessions Helper now"
     @response = OpussApi.logon(params[:osession][:username],params[:osession][:password])
     cookies.permanent[:opuss_token] = @response["data"]["session_token"]
@@ -10,7 +14,7 @@ module OsessionsHelper
     return @response
   end
 
-  def osigned_in?
+  def xxosigned_in?
     !cookies[:opuss_token].nil?
     # What happens if I push a new version of Opuss Web App? Cookie is now invalid...
     # This method needs to be more robust.  What if the cookie is incorrect?
@@ -18,7 +22,7 @@ module OsessionsHelper
   end
 
   
-  def osign_out
+  def xxosign_out
 #    self.ocurrent_user = nil
     puts "About to delete the cookie, the value is: #{cookies[:opuss_token]}"
     OpussApi.logoff

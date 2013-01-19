@@ -18,12 +18,15 @@ include OpussApi
      # Check to see if the user has a cookie already.  Posting to this will automatically invalidate the last sessionID.
 
     #Sign in the User.
-    @author = osign_in(params[:osession][:username],params[:osession][:password])
-#    @author = OpussApi.logon(params[:osession][:username],params[:osession][:password])
+#    @author = osign_in(params[:osession][:username],params[:osession][:password])
+    @author = OpussApi.logon(params[:osession][:username],params[:osession][:password])
     puts "Back in the Osessions controller"
     puts "Here: #{@author}"
     puts "#{@author["error_code"]} "
     puts "Did anything print or does being back mean I have no access to it?"
+    cookies.permanent[:opuss_token] = @author["data"]["session_token"]
+    puts "The session token direct: #{@author["data"]["session_token"]} "
+    puts "The cookie direct: #{cookies[:opuss_token]} "    
     if @author["error_code"].to_s !="200"
       flash.now[:error] = 'Invalid username or password'
       render 'new'
@@ -42,7 +45,8 @@ include OpussApi
   end
 
   def destroy
-    osign_out
+    OpussApi.osign_out
+    flash[:notice] = 'See you soon!'
     redirect_to root_url
   end
 

@@ -70,7 +70,7 @@ class OpussesController < ApplicationController
     def osigned_in_user
       #Debug Tip: Test if signedin by raising an exception..
       #raise signed_in?.inspect
-      unless osigned_in?
+      unless OpussApi.osigned_in?
         store_location
         redirect_to new_osession_path, notice: "Please sign in first." 
       end
