@@ -58,7 +58,7 @@ include HTTParty
   end
 
   def self.logoff
-    post('/session/logoff.json', :body => {:session => @session_token})
+    post('/session/logoff.json', :body => {:session => cookies[:opuss_token]})
   end
 
   private
