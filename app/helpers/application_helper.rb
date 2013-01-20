@@ -14,6 +14,7 @@ module ApplicationHelper
   def is_active()
   end
 
+  # Heroku / Rails throws a hissy fit if the image is null, only on production.  Not local..
   def safe_image_tag(source, options = {})
     source ||= "rails.png"
     image_tag(source, options)

@@ -10,9 +10,9 @@
        <a class="brand hidden-phone hidden-tablet" href="<%=root_path%>">Opuss</a> 
 
         <ul class="nav">
-          <li class="active"><%= link_to '<i class="icon-book"></i> Feed'.html_safe, opusses_path %></li>
-          <li><a href="<%= root_path %>"><i class="icon-fire"></i> Top</a></li>
-          <li><%= link_to '<i class="icon-edit"></i> New'.html_safe, root_path %></li> 
+          <li class="<%= 'active' if current_page?(opusses_path) %>"><%= link_to '<i class="icon-book"></i> Feed'.html_safe, opusses_path %></li>
+          <li class="<%= 'active' if current_page?(top_path) %>"><a href="<%= top_path %>"><i class="icon-fire"></i> Top</a></li>
+          <li class="<%= 'active' if current_page?(new_opuss_path) %>"><%= link_to '<i class="icon-edit"></i> New'.html_safe, root_path %></li> 
         </ul>
       <div class="nav-collapse">
 

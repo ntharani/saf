@@ -22,6 +22,11 @@ class OpussesController < ApplicationController
 #    end
   end
 
+  def indextop
+    @opusses = OpussApi.top_feed.parsed_response
+    render 
+  end
+
   def show
     # Show a particular Opuss. =/opusses/id 
     # opuss_path(opuss)

@@ -26,6 +26,10 @@ include HTTParty
     get('/feed/public.json', :query => {:session => @session_token, :limit => 31})
   end
 
+  def self.top_feed
+    get('/feed/top.json', :query => {:period => 'today', :session => @session_token, :limit => 31})
+  end
+
   def self.show_opuss(opuss)
     get('/opuss/opuss.json', :query => {:session => @session_token, :opuss_id => opuss})
   end
