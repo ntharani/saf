@@ -1,7 +1,7 @@
 require 'httparty'
 
 class OpussesController < ApplicationController
-  before_filter :osigned_in_user,  only: [:index]
+  before_filter :osigned_in_user,  only: [:index, :indextop, :new, :edit, :show]
   include OpussApi
 
   # Basic REST Actions..
@@ -24,7 +24,6 @@ class OpussesController < ApplicationController
 
   def indextop
     @opusses = OpussApi.top_feed.parsed_response
-    render 
   end
 
   def show

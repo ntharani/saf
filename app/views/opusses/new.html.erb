@@ -1,12 +1,27 @@
 <%= provide(:title, 'New Opuss') %>
+
 <div class="row">
-  <div class="span5 offset3">
-    <%= form_for(:opuss, url: opusses_path) do |f| %>
-        <%= f.label :title %>
-        <%= f.text_field  :title %>
-        <%= f.label :opuss  %>
-        <%= f.password_field :opuss %>
+  <div class="span6 offset3 nagib">
+    <%= form_for(:opuss, html: {class: "form-horizontal"} ) do |f| %>
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_field  :title, placeholder: 'Opuss Title' %>
+      </div>
+    </div>
+    <div class="control-group">
+        <%#= f.label :opuss, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_area :opuss, placeholder: 'My Opuss' %>
+        </div>
+      </div>
+    <div class="control-group">
+        <div class="controls">
         <%= f.submit "Post Opuss!", class: "btn btn-large btn-primary" %>
+        </div>
+    </div>
+
+
     <% end %>
   </div>
-</div> 
+</div>
