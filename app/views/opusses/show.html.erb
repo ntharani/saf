@@ -1,18 +1,13 @@
-<h1>Opusses#Show</h1>
-<p>Find me in app/views/opusses/show.html.erb</p>
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>
-        <%= @opuss["data"]["author"]["name"]%>
-      </h1>
+      <strong><%= @opuss["data"]["title"]%></strong>
+      <i> By: <%= @opuss["data"]["author"]["name"]%></i>
       <hr>
-      <h3> Bio </h3>
-      <p><%= @opuss["data"]["author"]["bio"]%></p>
-      <hr>
-      <h3> Opuss </h3>
       <p><%= @opuss["data"]["opuss"]%></p>
       <hr>
+      <strong><i>Bio </i></strong>
+      <p><%= @opuss["data"]["author"]["bio"]%></p>
     </section>
   </aside>
 </div>
