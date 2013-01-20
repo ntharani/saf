@@ -14,5 +14,9 @@ module ApplicationHelper
   def is_active()
   end
 
+  def safe_image_tag(source, options = {})
+    source ||= "rails.png"
+    image_tag(source, options)
+  end
 
 end

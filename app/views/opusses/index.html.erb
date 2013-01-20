@@ -1,6 +1,6 @@
 <% @opusses["data"].each do |opusses| %>
 <ul class="ousers">
-    <li><%= image_tag(opusses["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48") %> <%= link_to opusses["title"], opuss_path(:id => opusses["opuss_id"]) %> By: <%= opusses["author"]["name"]%> </li>
+    <li><%= safe_image_tag(opusses["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48") %> <%= link_to opusses["title"], opuss_path(:id => opusses["opuss_id"]) %> By: <%= opusses["author"]["name"]%> </li>
     <li><%= truncate(opusses["opuss"], :length => 140) %></li>
     <li><%= distance_of_time_in_words(opusses["created"], Time.now.utc)%> ago</li>
 </ul>
