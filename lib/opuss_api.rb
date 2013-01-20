@@ -49,10 +49,9 @@ include HTTParty
   end
 
   def self.osign_out
-    cookies.delete(:opuss_token)
+    #cookies.delete(:opuss_token)
     puts "About to delete the cookie, the value is: #{cookies[:opuss_token]}"
     logoff
-    cookies.delete(:opuss_token)
     puts "I have deleted the cookie, the value is now #{cookies[:opuss_token]}"
     @session_token = nil
     return @session_token

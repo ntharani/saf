@@ -126,6 +126,31 @@ aside {
   }
 }
 
+.ousers {
+  list-style: none;
+  margin: 0;
+  background-color: #f7f7f9;
+
+
+
+
+  li {
+    overflow: auto;
+    padding: 10px;
+
+
+    &:first-child {
+        border-top: 1px solid $grayLighter;
+    }
+
+    &:last-child {
+    background-color: #FFF8DC;
+    border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+
 /* Pretty CSS Forms
 -------------------------------------------------- */
 
