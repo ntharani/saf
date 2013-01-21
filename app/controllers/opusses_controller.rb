@@ -41,7 +41,16 @@ class OpussesController < ApplicationController
   def create
     # POST the Opuss
     # opusses_path
+    @cresponse = OpussApi.create_opuss(params[:opuss][:opuss],params[:opuss][:title])
+    if @cresponse["error_code"].to_s !="200"
+      flash.now[:error] = 'Failed.  Please make sure your Opuss has content'
+      render 'new'
+    else
+      flash[:success] = 'Thanks!'
+      redirect_to '/opusses'
+    end
   end
+
 
   def edit
     # Render the Edit form for a specific Opuss =/opusses/id/edit
