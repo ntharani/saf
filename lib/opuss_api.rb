@@ -36,7 +36,7 @@ include HTTParty
 
   def self.create_opuss(new_opuss, title)
     # hard code type and genre for now..
-    @result = post('http://api.opuss.com/opuss/save.json', :body => {:session => @session_token, :new_opuss => new_opuss, :type => 'Blog', :genre => 'General', title => title }) 
+    @result = post('http://api.opuss.com/opuss/save.json', :body => {:session => @session_token, :new_opuss => new_opuss, :type => 'Blog', :genre => 'General', :title => title }) 
     return @result
   end
 
