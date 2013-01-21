@@ -4,5 +4,5 @@
     <li><%= link_to truncate(opusses["opuss"], :length => 140), opuss_path(:id => opusses["opuss_id"]) %></li>
     <li><%= distance_of_time_in_words(opusses["created"], Time.now.utc)%> ago</li>
 </ul>
-<br> 
+<br>
 <% end %>

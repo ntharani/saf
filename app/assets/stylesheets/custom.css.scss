@@ -126,12 +126,18 @@ aside {
   }
 }
 
+.bio {
+      background-color: #f7f7f9;
+      padding: 10px;
+      margin: 0;
+
+
+}
+
 .ousers {
   list-style: none;
   margin: 0;
   background-color: #f7f7f9;
-
-
 
 
   li {
@@ -149,6 +155,7 @@ aside {
     border-bottom: 1px solid $grayLighter;
     }
   }
+
 }
 
 
@@ -158,6 +165,11 @@ aside {
 .opussheight textarea
 {
   height: 150px;
+  /* width: auto; */
+}
+
+.opusstitle input
+{
   width: auto;
 }
 
