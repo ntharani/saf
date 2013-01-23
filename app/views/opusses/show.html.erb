@@ -2,11 +2,10 @@
   <aside class="span4">
     <section>
       <p>Author ID of the logged in user: <%= @showedit %> | Author of this post: <%= @opuss["data"]["author"]["author_id"] %></p>
-      <% if @showedit == @opuss["data"]["author"]["author_id"] %>
+      <% if @showedit.to_s == @opuss["data"]["author"]["author_id"].to_s %>
         <ul class="nav nav-pills">
           <li><%= link_to "Edit My Opuss", edit_opuss_path(@opuss) %></li>
         </ul>
-      <% else %>
       <% end %>
 
 

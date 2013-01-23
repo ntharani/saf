@@ -61,7 +61,7 @@ class OpussesController < ApplicationController
     # The show controller enforces whether to show the control
     # Here we need to prevent a malicious attempt to edit someone elses Opuss 
     @response = OpussApi.show_opuss(params[:id]).parsed_response
-    unless @response["data"]["author"]["author_id"] == cookies[:author_id]
+    unless @response["data"]["author"]["author_id"].to_s == cookies[:author_id].to_s
       redirect_to root_url, notice: "Tsk Tsk. You can't edit someone elses Opuss"
     end
 
@@ -70,11 +70,22 @@ class OpussesController < ApplicationController
   def update
     # Update the Opuss Edits using a PUT to =/opusses/id
     # opuss_path(opuss)
+    # Post the code here to update :)
+    @uresponse = OpussApi.update_opuss(params[:opuss][:title],params[:opuss][:opuss],params[:id])
+    if @uresponse["error_code"].to_s !="200"
+      flash.now[:error] = 'Failed.  Please make sure your Opuss has content'
+      render 'edit'
+    else
+      flash[:success] = 'Updated!'
+      redirect_to '/opusses'
+    end
   end
 
   def destroy
     # DELETE the Opuss via method: delete
     # opuss_path(opuss)
+    # This one could be tricky.. might be useful to refactor the code for show/edit where
+    # we verify the user committing the act is the owner of resource.. (eg: Update/Delete)
   end
 
   # Some other ones:

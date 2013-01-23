@@ -40,7 +40,9 @@ include HTTParty
     return @result
   end
 
-  def self.update_opuss
+  def self.update_opuss(title, opuss, opuss_id)
+    @result = post('http://api.opuss.com/opuss/edit.json', body => {:session => @session_token, :opuss_id => opuss_id, :title => title, :opuss => opuss })
+    return @result
   end
 
   def self.destroy_opuss
@@ -100,8 +102,8 @@ include HTTParty
     #cookies.permanent.signed[:authorid] = @author_login["data"]["author_id"]
     #puts "In Priv method; The cookie for opuss_token is: #{cookies.permanent.signed[:opuss_token]}"
     #puts "In Priv method; The cookie for authorid is: #{cookies.permanent.signed[:opuss_token]}"
-#    This method fails! (I tried setting cookies in a helper which works, but visibility is lost back here.)
-#    I tried to namespace call it and that failed as well, am I missing something?
+#   This method fails! (I tried setting cookies in a helper which works, but visibility is lost back here.)
+#   I tried to namespace call it and that failed as well, am I missing something?
   end
 
 
