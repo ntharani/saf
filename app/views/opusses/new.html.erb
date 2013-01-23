@@ -1,27 +1,25 @@
 <%= provide(:title, 'New Opuss') %>
 
-<div class="row">
-  <div class="span6">
+
     <%= form_for(:opuss, url: opusses_path) do |f| %>
-      <div class="control-group">
-        <%#= f.label :title, {class: "control-label"} %>
-        <div class="controls">
+    <div class="control-group">
+      <%#= f.label :title, {class: "control-label"} %>
+      <div class="controls">
         <%= f.text_field  :title, placeholder: 'Opuss Title' %>
       </div>
     </div>
+
     <div class="control-group opussheight">
-        <%#= f.label :opuss, {class: "control-label"} %>
-        <div class="controls">
+      <%#= f.label :opuss, {class: "control-label"} %>
+      <div class="controls">
         <%= f.text_area :opuss, placeholder: 'My Opuss' %>
-        </div>
       </div>
-    <div class="control-group">
-        <div class="controls">
-        <%= f.submit "Post Opuss!", class: "btn btn-large btn-primary" %>
-        </div>
     </div>
 
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "Post Opuss!", class: "btn btn-large btn-primary" %>
+      </div>
+    </div>
 
     <% end %>
-  </div>
-</div>

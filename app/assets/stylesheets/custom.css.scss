@@ -173,6 +173,11 @@ aside {
   width: auto;
 }
 
+input,
+textarea,
+.uneditable-input {
+  width: 100%;
+}
 
 /* Error Message Styling
 -------------------------------------------------- */

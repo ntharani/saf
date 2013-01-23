@@ -62,7 +62,7 @@ class OpussesController < ApplicationController
     # Here we need to prevent a malicious attempt to edit someone elses Opuss 
     @response = OpussApi.show_opuss(params[:id]).parsed_response
     unless @response["data"]["author"]["author_id"] == cookies[:author_id]
-      redirect_to root_url, notice: "Naughty.  You can't edit someone else's Opuss"
+      redirect_to root_url, notice: "Tsk Tsk. You can't edit someone elses Opuss"
     end
 
   end
