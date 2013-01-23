@@ -3,7 +3,8 @@
 <div class="row">
   <div class="span6">
     <%= puts "#{@response["data"]["title"]}" %>
-    <%= form_for(:opuss, url: opusses_path(@opuss)) do |f| %>
+    <%= form_for(:opuss, :url => { :action => "update" }, :html => { :method => 'put' } ) do |f| %>
+
       <div class="control-group">
         <%#= f.label :title, {class: "control-label"} %>
         <div class="controls">

@@ -40,8 +40,8 @@ include HTTParty
     return @result
   end
 
-  def self.update_opuss(title, opuss, opuss_id)
-    @result = post('http://api.opuss.com/opuss/edit.json', body => {:session => @session_token, :opuss_id => opuss_id, :title => title, :opuss => opuss })
+  def self.update_opuss(opuss_id, title, opuss)
+    @result = post('http://api.opuss.com/opuss/edit.json', :body => {:session => @session_token, :opuss_id => opuss_id, :title => title, :opuss => opuss })
     return @result
   end
 

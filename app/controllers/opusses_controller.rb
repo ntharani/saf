@@ -71,7 +71,7 @@ class OpussesController < ApplicationController
     # Update the Opuss Edits using a PUT to =/opusses/id
     # opuss_path(opuss)
     # Post the code here to update :)
-    @uresponse = OpussApi.update_opuss(params[:opuss][:title],params[:opuss][:opuss],params[:id])
+    @uresponse = OpussApi.update_opuss(params[:id],params[:opuss][:title],params[:opuss][:opuss])
     if @uresponse["error_code"].to_s !="200"
       flash.now[:error] = 'Failed.  Please make sure your Opuss has content'
       render 'edit'
