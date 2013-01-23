@@ -1,8 +1,7 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <h1>The Author ID from Cookie: <%= @showedit %></h1>
-      <h1>The Author ID from Cookie: <%= @opuss["data"]["author"]["author_id"] %></h1>
+      <p>Author ID of the logged in user: <%= @showedit %> | Author of this post: <%= @opuss["data"]["author"]["author_id"] %></p>
       <% if @showedit == @opuss["data"]["author"]["author_id"] %>
         <ul class="nav nav-pills">
           <li><%= link_to "Edit My Opuss", edit_opuss_path(@opuss) %></li>

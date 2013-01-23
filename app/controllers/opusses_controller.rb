@@ -58,7 +58,13 @@ class OpussesController < ApplicationController
   def edit
     # Render the Edit form for a specific Opuss =/opusses/id/edit
     # opuss_path(opuss)
+    # The show controller enforces whether to show the control
+    # Here we need to prevent a malicious attempt to edit someone elses Opuss 
     @response = OpussApi.show_opuss(params[:id]).parsed_response
+    unless @response["data"]["author"]["author_id"] == cookies[:author_id]
+      redirect_to root_url, notice: "Naughty.  You can't edit someone else's Opuss"
+    end
+
   end
 
   def update
