@@ -79,12 +79,13 @@ include HTTParty
       @session_token = @author_login["data"]["session_token"]
       set_token(@session_token)
       puts @session_token
+
     end
       return @author_login
   end
 
   def self.logoff
-    post('/session/logoff.json', :body => {:session => cookies[:opuss_token]})
+    post('/session/logoff.json', :body => {:session => @session_token })
   end
 
   private
@@ -95,7 +96,10 @@ include HTTParty
   end
 
   def self.set_token(token)
-#    cookies.permanent.signed[:opuss_token] = token
+    #cookies.permanent.signed[:opuss_token] = @session_token
+    #cookies.permanent.signed[:authorid] = @author_login["data"]["author_id"]
+    #puts "In Priv method; The cookie for opuss_token is: #{cookies.permanent.signed[:opuss_token]}"
+    #puts "In Priv method; The cookie for authorid is: #{cookies.permanent.signed[:opuss_token]}"
 #    This method fails! (I tried setting cookies in a helper which works, but visibility is lost back here.)
 #    I tried to namespace call it and that failed as well, am I missing something?
   end

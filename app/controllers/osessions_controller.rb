@@ -25,8 +25,11 @@ include OpussApi
     puts "#{@author["error_code"]} "
     puts "Did anything print or does being back mean I have no access to it?"
     cookies.permanent[:opuss_token] = @author["data"]["session_token"]
+    cookies.permanent[:author_id] = @author["data"]["author"]["author_id"]
+    puts "The logon author_id (to compare when updating) direct: #{@author["data"]["author"]["author_id"]} "
     puts "The session token direct: #{@author["data"]["session_token"]} "
     puts "The cookie direct: #{cookies[:opuss_token]} "    
+    puts "The author cookie direct: #{cookies[:author_id]} "    
     if @author["error_code"].to_s !="200"
       flash.now[:error] = 'Invalid username or password'
       render 'new'

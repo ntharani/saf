@@ -1,0 +1,28 @@
+<%= provide(:title, 'New Opuss') %>
+
+<div class="row">
+  <div class="span6">
+    <%= puts "#{@response["data"]["title"]}" %>
+    <%= form_for(:opuss, url: opusses_path(@opuss)) do |f| %>
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_field  :title, :value => @response["data"]["title"], placeholder: 'Title' %>
+      </div>
+    </div>
+    <div class="control-group opussheight">
+        <%#= f.label :opuss, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_area :opuss, :value => @response["data"]["opuss"], placeholder: 'My Opuss' %>
+        </div>
+      </div>
+    <div class="control-group">
+        <div class="controls">
+        <%= f.submit "Update Opuss", class: "btn btn-large btn-primary" %>
+        </div>
+    </div>
+
+
+    <% end %>
+  </div>
+</div>
