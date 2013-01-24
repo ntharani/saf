@@ -1,6 +1,6 @@
 <%= provide(:title, 'New Opuss') %>
 
-<div class="row">
+<div class="row-fluid">
   <div class="span6">
     <%= puts "#{@response["data"]["title"]}" %>
     <%= form_for(:opuss, :url => { :action => "update" }, :html => { :method => 'put' } ) do |f| %>

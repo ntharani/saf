@@ -86,6 +86,14 @@ class OpussesController < ApplicationController
     # opuss_path(opuss)
     # This one could be tricky.. might be useful to refactor the code for show/edit where
     # we verify the user committing the act is the owner of resource.. (eg: Update/Delete)
+    @dresponse = OpussApi.destroy_opuss(params[:id])
+    if @dresponse["error_code"].to_s !="200"
+      flash.now[:error] = 'Failed. Please email support@opuss.com with the OpussID'
+      render 'show'
+    else
+      flash[:success] = 'Done!'
+      redirect_to '/opusses'
+    end    
   end
 
   # Some other ones:

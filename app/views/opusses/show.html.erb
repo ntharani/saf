@@ -4,7 +4,8 @@
       <!-- <p>Author ID of the logged in user: <%= @showedit %> | Author of this post: <%= @opuss["data"]["author"]["author_id"] %></p>-->
       <% if @showedit.to_s == @opuss["data"]["author"]["author_id"].to_s %>
         <ul class="nav nav-pills">
-          <li><%= link_to "Edit My Opuss", edit_opuss_path(@opuss) %></li>
+          <li><%= link_to "Edit", edit_opuss_path(@opuss) %></li>
+          <li><%= link_to "Delete", opuss_path(@opuss), method: "delete", confirm: "You sure?" %></li>          
         </ul>
       <% end %>
 

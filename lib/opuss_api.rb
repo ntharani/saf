@@ -45,7 +45,8 @@ include HTTParty
     return @result
   end
 
-  def self.destroy_opuss
+  def self.destroy_opuss(opuss_id)
+    @result = post('http://api.opuss.com/opuss/delete.json', :body => {:session => @session_token, :opuss_id => opuss_id} )
   end
 
   def self.osigned_in?
