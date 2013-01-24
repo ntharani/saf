@@ -1,7 +1,7 @@
 <div class="row">
   <aside class="span4">
     <section>
-      <p>Author ID of the logged in user: <%= @showedit %> | Author of this post: <%= @opuss["data"]["author"]["author_id"] %></p>
+      <!-- <p>Author ID of the logged in user: <%= @showedit %> | Author of this post: <%= @opuss["data"]["author"]["author_id"] %></p>-->
       <% if @showedit.to_s == @opuss["data"]["author"]["author_id"].to_s %>
         <ul class="nav nav-pills">
           <li><%= link_to "Edit My Opuss", edit_opuss_path(@opuss) %></li>
@@ -12,7 +12,7 @@
       <strong><%= @opuss["data"]["title"]%></strong>
       <i> By: <%= @opuss["data"]["author"]["name"]%></i>
       <hr>
-      <p><%= @opuss["data"]["opuss"]%></p>
+      <%= @opuss["data"]["opuss"].gsub(/\n/, "<br/>").html_safe %>
       <hr>
       <strong><i>Bio </i></strong>
       <p><%= @opuss["data"]["author"]["bio"]%></p>
