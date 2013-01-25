@@ -11,9 +11,9 @@
     </div>
   </div>
   <ul class="nav nav-pills">
-    <li style="width:80px; text-align: center;"><a href="#">  <%= @author["data"]["numberOfWorks"] %> Opusses</a></li>
-    <li style="width:80px; text-align: center;"><a href="#">  <%= @author["data"]["numberFollowing"] %> Following</a></li>
-    <li style="width:80px; text-align: center;"><a href="#">  <%= @author["data"]["numberOfFollowers"]%> Followers</a></li>
+    <li style="width:75x; text-align: center;"><a href="#"><%= @author["data"]["numberOfWorks"] %> Opusses</a></li>
+    <li style="width:75px; text-align: center;"><a href="#"><%= @author["data"]["numberFollowing"] %> Following</a></li>
+    <li style="width:75px; text-align: center;"><a href="#"><%= @author["data"]["numberOfFollowers"]%> Followers</a></li>
     <% if @showedit.to_s == @author["data"]["author_id"].to_s %>
       <li style="width:80px; text-align: center;"><%= link_to "Edit Profile", edit_author_path(@author) %></li>
     <%end %>
