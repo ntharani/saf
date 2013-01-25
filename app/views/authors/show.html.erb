@@ -12,10 +12,10 @@
   </div>
 </div>
 
-  <ul class="nav nav-tabs" style="font-size: 0.8em;">
-    <li class="active"><a href="#tab1" data-toggle="tab">Opusses: <%= @author["data"]["numberOfWorks"] %></a></li>
-    <li><a href="#tab2" data-toggle="tab">Following: <%= @author["data"]["numberFollowing"] %></a></li>
-    <li><a href="#tab3" data-toggle="tab">Followers: <%= @author["data"]["numberOfFollowers"]%></a></li>
+  <ul class="nav nav-tabs" style="font-size: 0.9em;">
+    <li class="active" style="width:80px; text-align: center;"><a href="#tab1" data-toggle="tab"><%= @author["data"]["numberOfWorks"] %> Opusses</a></li>
+    <li style="width:80px; text-align: center;"><a href="#tab2" data-toggle="tab"><%= @author["data"]["numberFollowing"] %> Following</a></li>
+    <li style="width:80px; text-align: center;"><a href="#tab3" data-toggle="tab"><%= @author["data"]["numberOfFollowers"]%> Followers</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
