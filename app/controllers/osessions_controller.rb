@@ -26,6 +26,7 @@ include OpussApi
     puts "Did anything print or does being back mean I have no access to it?"
     cookies.permanent[:opuss_token] = @author["data"]["session_token"]
     cookies.permanent[:author_id] = @author["data"]["author"]["author_id"]
+    cookies.permanent[:username] = @author["data"]["username"]
     puts "The logon author_id (to compare when updating) direct: #{@author["data"]["author"]["author_id"]} "
     puts "The session token direct: #{@author["data"]["session_token"]} "
     puts "The cookie direct: #{cookies[:opuss_token]} "    

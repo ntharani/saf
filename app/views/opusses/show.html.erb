@@ -9,14 +9,18 @@
         </ul>
       <% end %>
 
-
-      <strong><%= @opuss["data"]["title"]%></strong>
-      <i> By: <%= @opuss["data"]["author"]["name"]%></i>
-      <hr>
-      <%= @opuss["data"]["opuss"].gsub(/\n/, "<br/>").html_safe %>
-      <hr>
-      <strong><i>Bio </i></strong>
-      <p><%= @opuss["data"]["author"]["bio"]%></p>
+      <div class="showdet">
+        <strong><%= @opuss["data"]["title"]%></strong>
+        <br>
+        <div class="by">
+          <i> By <%= @opuss["data"]["author"]["name"]%></i>
+        </div>
+      </div>
+        <br>
+        <ul id="indexfeed">
+          <li><%= @opuss["data"]["opuss"].gsub(/\n/, "<br/>").html_safe %></li>
+        </ul>
+      </div>
     </section>
   </aside>
 </div>

@@ -130,20 +130,17 @@ aside {
       background-color: #f7f7f9;
       padding: 10px;
       margin: 0;
-
-
 }
 
-.ousers {
+#indexfeed {    
+  background-color: #FFFFFF;
   list-style: none;
   margin: 0;
-  background-color: #f7f7f9;
-
 
   li {
     overflow: auto;
     padding: 10px;
-
+    font-family: 'Cutive Mono', serif;
 
     &:first-child {
         border-top: 1px solid $grayLighter;
@@ -151,13 +148,50 @@ aside {
 
     &:last-child {
     padding: 0px 0px 0px 10px;
-    background-color: #FFF8DC;
     border-bottom: 1px solid $grayLighter;
+    }
+  }
+}
+
+.ousers {
+  list-style: none;
+  margin: 0;
+  background-color: #f7f7f9;
+  
+  li {
+    overflow: auto;
+    padding: 10px;
+    font-family: 'Cutive Mono', serif;
+
+    &:first-child {
+        border-top: 1px solid $grayLighter;
+    }
+
+    a {
+    color: $grayDark;
+    }
+    
+    a:hover { text-decoration: none; 
+    }
+
+    &:last-child {
+    padding: 0px 0px 0px 10px;
+    border-bottom: 1px solid $grayLighter;
+    background-color: #FFF8DC;
     }
   }
 
 }
 
+.showdet {
+  font-family: 'Cutive Mono', serif;
+  font-size: 1.3em;
+  text-align: center;
+
+  .by {
+    font-size: 0.8em;
+  }
+}
 
 /* Pretty CSS Forms
 -------------------------------------------------- */

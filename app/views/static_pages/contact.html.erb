@@ -1,17 +1,15 @@
 <%= provide(:title, 'Contact') %>
+
+<div class="container">
+  <div class="row">
+    <div><%= safe_image_tag("rails.png", alt: "Avatar", class: "gravatar", size: "72x72") %></div>
+    <div>
+      <h5 style="margin:0px;">Nagib Tharani</h5>
+      <p style="height:40px; overflow: auto;">CEO and Cofounder of Seamonster. Likes talking more than writing. Ever speak your emails silently as you write? Thats me. Irony:- and coming back to a company spreading a love of words.</p>
+    </div>
+  </div>
+</div>
+
 <h1>Contact</h1>
 <p>Find me in app/views/static_pages/contact.html.erb</p>
 
-<%= provide(:title, 'New Opuss') %>
-
-
-    <%= form_for(:opuss, url: opusses_path) do |f| %>
-      <%#= f.label :title, {class: "control-label"} %>
-        <%= f.text_field  :title, placeholder: 'Opuss Title' %>
-
-      <%#= f.label :opuss, {class: "control-label"} %>
-        <%= f.text_area :opuss, placeholder: 'My Opuss' %>
-
-        <%= f.submit "Post Opuss!", class: "btn btn-large btn-primary" %>
-
-    <% end %>

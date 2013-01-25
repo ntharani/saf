@@ -5,9 +5,11 @@
     <li><a href="#">Likes: <%= opusses["numberOfLikes"] %></a></li>
 </ul>
 <ul class="ousers">
-    <li><%= link_to opusses["title"], opuss_path(:id => opusses["opuss_id"]) %> By: <%= opusses["author"]["name"]%> </li>
+    <li style="font-size: 1.2em; text-align: center;"><strong><%= link_to opusses["title"], opuss_path(:id => opusses["opuss_id"]) %></strong></li>
     <li><%= link_to truncate(opusses["opuss"], :length => 140), opuss_path(:id => opusses["opuss_id"]) %></li>
     <li><%= distance_of_time_in_words(opusses["created"], Time.now.utc)%> ago</li>
 </ul>
-<br>
+<br> 
 <% end %>
+
+<%#= opusses["author"]["username"]%> 

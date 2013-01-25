@@ -1,34 +1,21 @@
-class OpussesController < ApplicationController
+class AuthorsController < ApplicationController
   before_filter :osigned_in_user,  only: [:index, :indextop, :new, :edit, :show]
   include OpussApi
 
   # Basic REST Actions..
 
   def index
-
-    # the Opuss feed =/opusses
-    # opusses
-    puts "I'm in the OpussesController"
-#      if osigned_in?
-#      puts "Yes Signed In"
-#      puts "the cookie value is #{cookies[:opuss_token]}"
-      @opusses = OpussApi.public_feed.parsed_response
-#    else
-#      puts "Not not signed in"
-#      flash[:notice] = 'Please sign in'
-#      render 'new'
-#    end
-  end
-
-  def indextop
-    @opusses = OpussApi.top_feed.parsed_response
+    # the Authors feed =/authors
+    puts "I'm in the AuthorsController"
+      @authors = OpussApi.public_feed.parsed_response
   end
 
   def show
-    # Show a particular Opuss. =/opusses/id 
-    # opuss_path(opuss)
-    @opuss = OpussApi.show_opuss(params[:id])
-    @showedit = cookies[:author_id]
+    # Show a particular Author. =/authors/id 
+    # author_path(author)
+    @author = OpussApi.show_author(params[:id])
+    puts "Received author object: #{@author}"
+    puts @author
     puts "In Opusses SHOW. Check for edit: Here is the author-id I captured during logon #{cookies[:author_id]}"
     # Use this author_id to compare to current author_id in the response object, if the two match
     # Show the "edit this Opuss" button
@@ -94,16 +81,6 @@ class OpussesController < ApplicationController
     end    
   end
 
-  # Some other ones:
-
-  #  authorfeed = get('feed/author.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :username => 'sb2uk', :limit => 31, :output => 'json'})
-  
-  #  myfeed = get('feed/feed.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31, :output => 'json'})
-  
-
-  # Show_all: The public feed from the Opuss firehose
-  # Search: Find_by (Category or Hashtag)
-  # Show Categories and View Those (eg: Everything, Jokes etc.)
 
   private
 

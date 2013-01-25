@@ -4,6 +4,7 @@ Saf::Application.routes.draw do
   resources :sessions,  only: [:new, :create, :destroy]
   resources :osessions, only: [:new, :create, :destroy]
   resources :opusses
+  resources :authors
 
   root               to: 'static_pages#home'
   match '/signin',   to: 'sessions#new'
@@ -15,6 +16,7 @@ Saf::Application.routes.draw do
   match '/ologin',   to: 'osessions#new'
   match '/osignout', to: 'osessions#destroy', via: :delete
   match '/top',      to: 'opusses#indextop'
+  match '/profile',  to: 'authors#show'
 
 # Static Pages Controller
 

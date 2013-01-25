@@ -20,7 +20,7 @@ include HTTParty
   base_uri 'http://api.opuss.com'
   format :json
 
-  ####### Relevant to Opusses Controller 
+####### Relevant to Opusses Controller 
 
   def self.public_feed
     get('/feed/public.json', :query => {:session => @session_token, :limit => 31})
@@ -49,6 +49,8 @@ include HTTParty
     @result = post('http://api.opuss.com/opuss/delete.json', :body => {:session => @session_token, :opuss_id => opuss_id} )
   end
 
+####### Relevant to Osessions Controller 
+
   def self.osigned_in?
     puts "Am I signed in? Heres my session token: #{@session_token}"
     puts "Here is the cookie I set locally #{cookies[:opuss_token]}"
@@ -67,6 +69,10 @@ include HTTParty
     return @session_token
   end
 
+  def self.myusername
+    return @username
+  end
+
 
   def self.logon(username, password)
     # if you login twice, the Api will automatically invalidate the last session_token.
@@ -78,6 +84,7 @@ include HTTParty
     else
       puts "Yeah! it was successful #{@author_login["error_code"]}"
       puts @author_login["data"]["author"]["name"]
+      @username = @author_login["data"]["author"]["username"]
       puts "This is the session token"
       @session_token = @author_login["data"]["session_token"]
       set_token(@session_token)
@@ -89,6 +96,13 @@ include HTTParty
 
   def self.logoff
     post('/session/logoff.json', :body => {:session => @session_token })
+  end
+
+####### Relevant to Authors Controller 
+
+  def self.show_author(username)
+    response = get('/author/author.json', :query => {:session => @session_token, :username => username})
+    return response
   end
 
   private
