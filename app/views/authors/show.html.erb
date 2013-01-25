@@ -10,12 +10,22 @@
       <p style="height:55px; overflow: auto; font-size:0.8em;"><%= @author["data"]["bio"] %></p>
     </div>
   </div>
+  <ul class="nav nav-pills">
+    <li style="width:80px; text-align: center;"><a href="#">  <%= @author["data"]["numberOfWorks"] %> Opusses</a></li>
+    <li style="width:80px; text-align: center;"><a href="#">  <%= @author["data"]["numberFollowing"] %> Following</a></li>
+    <li style="width:80px; text-align: center;"><a href="#">  <%= @author["data"]["numberOfFollowers"]%> Followers</a></li>
+    <% if @showedit.to_s == @author["data"]["author_id"].to_s %>
+      <li style="width:80px; text-align: center;"><%= link_to "Edit Profile", edit_author_path(@author) %></li>
+    <%end %>
+</ul>
 </div>
 
+
+
+
   <ul class="nav nav-tabs" style="font-size: 0.9em;">
-    <li class="active" style="width:80px; text-align: center;"><a href="#tab1" data-toggle="tab"><%= @author["data"]["numberOfWorks"] %> Opusses</a></li>
-    <li style="width:80px; text-align: center;"><a href="#tab2" data-toggle="tab"><%= @author["data"]["numberFollowing"] %> Following</a></li>
-    <li style="width:80px; text-align: center;"><a href="#tab3" data-toggle="tab"><%= @author["data"]["numberOfFollowers"]%> Followers</a></li>
+    <li class="active"><a href="#tab1" data-toggle="tab">News</a></li>
+    <li><a href="#tab2" data-toggle="tab">Liked</a></li>
   </ul>
   <div class="tab-content">
     <div class="tab-pane active" id="tab1">
@@ -23,9 +33,6 @@
     </div>
     <div class="tab-pane" id="tab2">
       <p>Howdy, I'm in Section 2.</p>
-    </div>
-    <div class="tab-pane" id="tab3">
-      <p>Howdy, I'm in Section 3. Use media objects here.</p>
     </div>
 
   </div>

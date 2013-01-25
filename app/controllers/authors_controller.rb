@@ -19,6 +19,7 @@ class AuthorsController < ApplicationController
     puts "In Opusses SHOW. Check for edit: Here is the author-id I captured during logon #{cookies[:author_id]}"
     # Use this author_id to compare to current author_id in the response object, if the two match
     # Show the "edit this Opuss" button
+    @showedit = cookies[:author_id]
   end
 
   def new
