@@ -23,17 +23,22 @@ class AuthorsController < ApplicationController
   end
 
   def new
+    # This form will be for a new author.
+    # Sign up socially (via Singly) or Through a regular form.
   end
 
   def create
+    # This will receive instructions from either the new #POST action or Singly.
   end
 
 
   def edit
+    # This screen will render the Authors Opuss profile
   end
 
 
   def update
+    # This screen will update the Authors profile.
   end
 
   def destroy
@@ -47,8 +52,8 @@ class AuthorsController < ApplicationController
 #   This method is exactly identical to one in opussescontroller - but when invoked here
 #   it causes the user to continuously login.  What am I missing?
 
-     unless OpussApi.osigned_in?
-#      unless oosigned_in?
+#     unless OpussApi.osigned_in?
+      unless oosigned_in?
         store_location
         redirect_to new_osession_path, notice: "Please sign in first." 
       end
