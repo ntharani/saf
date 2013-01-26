@@ -38,7 +38,8 @@
 
       <% @news["data"].each do |news| %>
       <div class="media">
-        <a class="pull-left" href="#"><%= safe_image_tag(news["sender_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48") %></a>
+        <!-- class="pull-left"  -->
+          <%= link_to(safe_image_tag(news["sender_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => news["sender_author"]["username"]), :class => "pull-left" ) %>
 
         <div class="media-body">
           <!--<h4 class="media-heading">Title</h4>-->
@@ -52,7 +53,7 @@
 
       <% @liked["data"].each do |like| %>
       <div class="media">
-        <a class="pull-left" href="#"><%= safe_image_tag(like["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48") %></a>
+          <%= link_to(safe_image_tag(like["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => like["author"]["username"]), :class => "pull-left" ) %>
         <div class="media-body">
           <!--<h4 class="media-heading">Title</h4>-->
           <p style="height:48px; overflow: auto; font-size:0.9em;"><%= like["title"] %></p>
