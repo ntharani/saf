@@ -22,31 +22,31 @@ include HTTParty
 
 ####### Relevant to Opusses Controller 
 
-  def self.public_feed
-    get('/feed/public.json', :query => {:session => @session_token, :limit => 31})
+  def self.public_feed(token)
+    get('/feed/public.json', :query => {:session => token, :limit => 31})
   end
 
-  def self.top_feed
-    get('/feed/top.json', :query => {:period => 'today', :session => @session_token, :limit => 31})
+  def self.top_feed(token)
+    get('/feed/top.json', :query => {:period => 'today', :session => token, :limit => 31})
   end
 
-  def self.show_opuss(opuss)
-    get('/opuss/opuss.json', :query => {:session => @session_token, :opuss_id => opuss})
+  def self.show_opuss(opuss,token)
+    get('/opuss/opuss.json', :query => {:session => token, :opuss_id => opuss})
   end
 
-  def self.create_opuss(new_opuss, title)
+  def self.create_opuss(new_opuss, title, token)
     # hard code type and genre for now..
-    @result = post('http://api.opuss.com/opuss/save.json', :body => {:session => @session_token, :new_opuss => new_opuss, :type => 'Blog', :genre => 'General', :title => title }) 
+    @result = post('http://api.opuss.com/opuss/save.json', :body => {:session => token, :new_opuss => new_opuss, :type => 'Blog', :genre => 'General', :title => title }) 
     return @result
   end
 
-  def self.update_opuss(opuss_id, title, opuss)
-    @result = post('http://api.opuss.com/opuss/edit.json', :body => {:session => @session_token, :opuss_id => opuss_id, :title => title, :opuss => opuss })
+  def self.update_opuss(opuss_id, title, opuss, token)
+    @result = post('http://api.opuss.com/opuss/edit.json', :body => {:session => token, :opuss_id => opuss_id, :title => title, :opuss => opuss })
     return @result
   end
 
-  def self.destroy_opuss(opuss_id)
-    @result = post('http://api.opuss.com/opuss/delete.json', :body => {:session => @session_token, :opuss_id => opuss_id} )
+  def self.destroy_opuss(opuss_id, token)
+    @result = post('http://api.opuss.com/opuss/delete.json', :body => {:session => token, :opuss_id => opuss_id} )
   end
 
 ####### Relevant to Osessions Controller 
@@ -55,24 +55,8 @@ include HTTParty
     puts "Am I signed in? Heres my session token: #{@session_token}"
     puts "Here is the cookie I set locally #{cookies[:opuss_token]}"
     puts "have now called the method ogetcookie"
-    #new_token = OsessionsHelper.ggg
-    #puts "ogetcookie returned new_token = #{new_token}"    
     return @session_token
   end
-
-  def self.osign_out
-    #cookies.delete(:opuss_token)
-    puts "About to delete the cookie, the value is: #{cookies[:opuss_token]}"
-    logoff
-    puts "I have deleted the cookie, the value is now #{cookies[:opuss_token]}"
-    @session_token = nil
-    return @session_token
-  end
-
-  def self.myusername
-    return @username
-  end
-
 
   def self.logon(username, password)
     # if you login twice, the Api will automatically invalidate the last session_token.
@@ -89,13 +73,13 @@ include HTTParty
       @session_token = @author_login["data"]["session_token"]
       set_token(@session_token)
       puts @session_token
-
     end
       return @author_login
   end
 
-  def self.logoff
-    post('/session/logoff.json', :body => {:session => @session_token })
+  def self.logoff(token)
+    post('/session/logoff.json', :body => {:session => token })
+    @session_token = nil
   end
 
 ####### Relevant to Authors Controller 

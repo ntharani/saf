@@ -34,22 +34,21 @@ include OpussApi
     if @author["error_code"].to_s !="200"
       flash.now[:error] = 'Invalid username or password'
       render 'new'
-#      osign_in(@author["data"]["
     else
+      oosign_in(@author)
       flash[:success] = "Welcome to Opuss!"
-      redirect_back_or '/opusses'
+      redirect_back_or root_url
     end
 #      puts "The session_token was nil, the user has been logged in now"
 #    else
 #      puts "A session exists, here's proof"
       #puts @session_token
 #    end
-
-
   end
 
   def destroy
-    OpussApi.osign_out
+    puts "Received delete request, just in case here is the cookie #{cookies[:otoken]}"
+    oosign_out
     flash[:notice] = 'See you soon!'
     redirect_to root_url
   end

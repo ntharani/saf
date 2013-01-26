@@ -1,34 +1,36 @@
 module OsessionsHelper
 
-  def ggg
-    return cookies[:opuss_token]
+  def oosign_in(ouser)
+    puts "I'm in the OSESSIONS HELPER"
+    cookies.permanent[:otoken] = ouser["data"]["session_token"]
+    cookies.permanent[:username] = ouser["data"]["author"]["username"]
+    puts "In the OSESSIONS helper, the cookie is: #{cookies[:otoken]}"
+    self.ocurrent_user = ouser
   end
 
-  def xxosign_in(username, password)
-    puts "In the Osessions Helper now"
-    @response = OpussApi.logon(params[:osession][:username],params[:osession][:password])
-    cookies.permanent[:opuss_token] = @response["data"]["session_token"]
-    puts "Just assigned a cookie"
-    puts "the cookie value is #{cookies[:opuss_token]}"
-    #self.ocurrent_user = cookies.permanent[:opuss_token]
-    return @response
+  def oosigned_in?
+    puts "In the oosigned_in? method"
+    !ocurrent_user.nil?
   end
 
-  def xxosigned_in?
-    !cookies[:opuss_token].nil?
-    # What happens if I push a new version of Opuss Web App? Cookie is now invalid...
-    # This method needs to be more robust.  What if the cookie is incorrect?
-    # Kludge: Call the author.json method (or anything with cookie session value), if the response code is anything but 200, redirect to login.
+  def ocurrent_user=(ouser)
+    @ocurrent_user = ouser
   end
 
-  
-  def xxosign_out
-#    self.ocurrent_user = nil
-    puts "About to delete the cookie, the value is: #{cookies[:opuss_token]}"
-    OpussApi.logoff
-    cookies.delete(:opuss_token)
-    flash[:notice] = 'See you soon!'
-    puts "I have deleted the cookie, the value is now #{cookies[:opuss_token]}"
+  def ocurrent_user
+    @ocurrent_user ||= cookies[:otoken]
+  end
+
+  def ocurrent_user?(ouser)
+    ouser == ocurrent_user
+  end
+
+  def oosign_out
+    puts "oSessions Helper: Received delete request, just in case here is the cookie #{cookies[:otoken]}"
+    self.ocurrent_user = nil
+    OpussApi.logoff(cookies[:otoken])
+    cookies.delete(:otoken)
+    cookies.delete(:username)
   end
 
 end
