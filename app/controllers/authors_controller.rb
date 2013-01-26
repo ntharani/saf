@@ -13,13 +13,15 @@ class AuthorsController < ApplicationController
   def show
     # Show a particular Author. =/authors/id 
     # author_path(author)
-    @author = OpussApi.show_author(params[:id])
+    @author = OpussApi.show_author(params[:id],cookies[:otoken])
     puts "Received author object: #{@author}"
     puts @author
     puts "In Opusses SHOW. Check for edit: Here is the author-id I captured during logon #{cookies[:author_id]}"
     # Use this author_id to compare to current author_id in the response object, if the two match
     # Show the "edit this Opuss" button
     @showedit = cookies[:author_id]
+    @news = OpussApi.author_news(cookies[:otoken])
+    @liked = OpussApi.author_liked(cookies[:otoken])
   end
 
   def new

@@ -84,10 +84,21 @@ include HTTParty
 
 ####### Relevant to Authors Controller 
 
-  def self.show_author(username)
-    response = get('/author/author.json', :query => {:session => @session_token, :username => username})
+  def self.show_author(username, token)
+    response = get('/author/author.json', :query => {:session => token, :username => username})
     return response
   end
+
+  def self.author_news(token)
+    response = get('/news/news.json', :query => {:session => token})
+    return response
+  end
+
+  def self.author_liked(token)
+    response = get('/opuss/liked.json', :query => {:session => token})
+    return response
+  end
+
 
   private
 
