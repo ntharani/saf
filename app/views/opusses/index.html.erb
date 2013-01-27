@@ -1,19 +1,18 @@
 <% @opusses["data"].each do |opusses| %>
-<ul class="nav nav-pills bio">
-    <li><%= safe_image_tag(opusses["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48") %></li>
-    <li><%= form_for(:like, :url => { :action => "like" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :like_id, :value => opusses["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-large") do %>
+<ul class="nav bio">
+    <li><%= safe_image_tag(opusses["author"]["avatar_url"], alt: "Avatar", class: "gravatar pull-left", size: "48x48") %></li>
+    <li><%= form_for(:like, :url => { :action => "like" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :like_id, :value => opusses["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-small pull-right") do %>
   <i class="icon-heart"></i>&nbsp;&nbsp;&nbsp; <%= opusses["numberOfLikes"] %><% end %><% end %></li>
-  <li><%= form_for(:comment, :url => { :action => "comment" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :comment_id, :value => opusses["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-large") do %>
+  <li><%= form_for(:comment, :url => { :action => "comment" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :comment_id, :value => opusses["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-small pull-right") do %>
   <i class="icon-comment"></i>&nbsp;&nbsp;&nbsp; <%= opusses["numberOfComments"] %><% end %><% end %></li>
 </ul>
 
 <ul class="ousers">
     <li style="font-size: 1.2em; text-align: center;"><strong><%= link_to opusses["title"], opuss_path(:id => opusses["opuss_id"]) %></strong></li>
     <li><%= link_to truncate(opusses["opuss"], :length => 140), opuss_path(:id => opusses["opuss_id"]) %></li> 
-    <li style="font-size: 0.8em;"><%= distance_of_time_in_words(opusses["created"], Time.now.utc)%> ago</li>
+    <li style="font-size: 0.9em;"><%= distance_of_time_in_words(opusses["created"], Time.now.utc)%> ago</li>
 </ul>
 <br> 
 <% end %>
 
 
-<%#= opusses["author"]["username"]%> 
