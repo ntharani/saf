@@ -1,6 +1,6 @@
-<div class="row">
-  <aside class="span4">
-    <section>
+<div class="container">
+  
+  <div class="row">
       <!-- <p>Author ID of the logged in user: <%= @showedit %> | Author of this post: <%= @opuss["data"]["author"]["author_id"] %></p>-->
       <% if @showedit.to_s == @opuss["data"]["author"]["author_id"].to_s %>
         <ul class="nav nav-pills">
@@ -16,11 +16,9 @@
           <i> By <%= @opuss["data"]["author"]["name"]%></i>
         </div>
       </div>
-        <br>
-        <ul id="indexfeed">
-          <li><%= @opuss["data"]["opuss"].gsub(/\n/, "<br/>").html_safe %></li>
-        </ul>
+      <div>
+        <hr />
+          <%= @opuss["data"]["opuss"].gsub(/\n/, "<br/>").html_safe %>
       </div>
-    </section>
-  </aside>
+  </div>
 </div>
