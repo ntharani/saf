@@ -49,6 +49,10 @@ include HTTParty
     @result = post('http://api.opuss.com/opuss/delete.json', :body => {:session => token, :opuss_id => opuss_id} )
   end
 
+  def self.like_opuss(opuss_id, token)
+    @result = post('http://api.opuss.com/opuss/like.json',   :body => {:session => token, :opuss_id => opuss_id} )
+  end
+
 ####### Relevant to Osessions Controller 
 
   def self.osigned_in?

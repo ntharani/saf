@@ -19,6 +19,7 @@ class OpussesController < ApplicationController
 #      flash[:notice] = 'Please sign in'
 #      render 'new'
 #    end
+
   end
 
   def indextop
@@ -93,6 +94,21 @@ class OpussesController < ApplicationController
       flash[:success] = 'Done!'
       redirect_to '/opusses'
     end    
+  end
+
+  def like
+    puts "In the like method, before I submit, I'm passing: #{params[:like][:like_id]} and #{cookies[:otoken]}"
+    @lresponse = OpussApi.like_opuss(params[:like][:like_id],cookies[:otoken])
+    puts "in the like method, this is the the response: #{@lresponse["error_code"].to_s}"
+    if @lresponse["error_code"].to_s !="200"
+      puts @lresponse["data"].to_s
+      flash[:error] = 'Failed. Please email support@opuss.com with the OpussID'
+      redirect_to '/opusses'
+    else
+      flash[:success] = 'Liked!'
+      redirect_to '/opusses'
+    end    
+
   end
 
   # Some other ones:
