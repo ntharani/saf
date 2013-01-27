@@ -132,27 +132,32 @@ aside {
       margin: 0;
 }
 
-#indexfeed {    
-  background-color: #FFFFFF;
-  list-style: none;
-  margin: 0;
 
-  li {
-    overflow: auto;
-    padding: 10px;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.1em;
 
-    &:first-child {
-        border-top: 1px solid $grayLighter;
-    }
-
-    &:last-child {
-    padding: 0px 0px 0px 10px;
-    border-bottom: 1px solid $grayLighter;
-    }
-  }
+.indexfeed {    
+  height: 64px;
+  margin: auto;
 }
+
+.indexfeedtext {    
+    font-family: 'Open Sans Condensed', sans-serif;
+    font-size: 1.2em;
+
+    a {
+    color: $grayDark;
+    }
+    
+    a:hover { text-decoration: none; 
+    }
+
+}
+
+
+
+form {
+    margin: 0 auto;
+  }
+
 
 .ousers {
   list-style: none;
