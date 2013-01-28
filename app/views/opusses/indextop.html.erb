@@ -3,7 +3,8 @@
 <div class="container">
   
   <div class="row">
-    <div ><%= safe_image_tag(opusses["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64") %></div>
+
+    <div><%= link_to(safe_image_tag(opusses["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64"),author_path(:id => opusses["author"]["username"]), :class => "pull-left" ) %></div>
 
     <div><%= form_for(:comment, :url => { :action => "comment" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :comment_id, :value => opusses["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-large pull-right indexfeed") do %><i class="icon-comment"></i>&nbsp;&nbsp;&nbsp; <%= opusses["numberOfComments"] %><% end %><% end %>
     </div>
