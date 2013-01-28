@@ -24,6 +24,10 @@ class OpussesController < ApplicationController
 
   def indextop
     @opusses = OpussApi.top_feed(cookies[:otoken]).parsed_response
+    if @opusses["data"].to_s == "No results"
+      flash[:error] = "It's just gone midnight GMT and we're starting a new day. Please try TOP a little later."
+      redirect_to '/opusses'
+    end
   end
 
   def show
