@@ -46,6 +46,14 @@ class AuthorsController < ApplicationController
   def destroy
   end
 
+  def following
+    @author = OpussApi.author_following(params[:id],cookies[:otoken]).parsed_response
+  end
+
+  def followed
+    @author = OpussApi.author_followers(params[:id],cookies[:otoken]).parsed_response
+  end
+
 
   private
 

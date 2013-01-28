@@ -30,6 +30,11 @@ include HTTParty
     get('/feed/top.json', :query => {:period => 'today', :session => token, :limit => 31})
   end
 
+  def self.author_feed(username, token)
+    get('/feed/author.json', :query => {:username => username, :session => token, :limit => 31})
+  end
+
+
   def self.show_opuss(opuss,token)
     get('/opuss/opuss.json', :query => {:session => token, :opuss_id => opuss})
   end
@@ -103,6 +108,13 @@ include HTTParty
     return response
   end
 
+  def self.author_following(username,token)
+    response = get('/author/following.json', :query => {:session => token, :username => username, :limit => 31})
+  end
+
+  def self.author_followers(username,token)
+    response = get('/author/followers.json', :query => {:session => token, :username => username, :limit => 31})
+  end
 
   private
 

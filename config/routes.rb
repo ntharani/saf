@@ -3,12 +3,19 @@ Saf::Application.routes.draw do
   resources :users
   resources :sessions,  only: [:new, :create, :destroy]
   resources :osessions, only: [:new, :create, :destroy]
-  resources :authors
+  
+  resources :authors do
+    member do
+      get :following
+      get :followed
+    end
+  end
 
   resources :opusses do
     member  do
       get :like
       get :comment
+      get :authorfeed
     end
   end
 

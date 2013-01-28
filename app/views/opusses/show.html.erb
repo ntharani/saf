@@ -13,7 +13,7 @@
         <strong><%= @opuss["data"]["title"]%></strong>
         <br>
         <div class="by">
-          <i> By <%= @opuss["data"]["author"]["name"]%></i>
+          <i> By <%= link_to @opuss["data"]["author"]["name"], author_path(:id=>@opuss["data"]["author"]["username"])%></i>
         </div>
       </div>
       <div>

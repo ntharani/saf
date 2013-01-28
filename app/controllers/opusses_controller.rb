@@ -30,6 +30,15 @@ class OpussesController < ApplicationController
     end
   end
 
+  def authorfeed
+    # The only thing avail in controllers are params.  So authorfeed(username) won't work
+    @opusses = OpussApi.author_feed(params[:id],cookies[:otoken]).parsed_response
+    if @opusses["data"].to_s == "No results"
+      flash[:error] = "No posts yet."
+      redirect_to '/opusses'
+    end
+  end
+
   def show
     # Show a particular Opuss. =/opusses/id 
     # opuss_path(opuss)

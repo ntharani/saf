@@ -1,0 +1,22 @@
+ <%= provide(:title, params[:id]) %>
+ <p><%#= @author %></p> 
+ <p><%#= @news %></p> 
+
+
+<div class="container">
+<h1><%= params[:id] %> is following:</h1>
+<hr>  
+
+  <% @author["data"].each do |author| %>
+  <div class="media">
+    <%= link_to(safe_image_tag(author["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => author["username"]), :class => "pull-left" ) %>
+
+    <div class="media-body">
+      <h4 class="media-heading"><%= author["name"] %></h4>
+      <p style="height:48px; overflow: auto; font-size:0.9em;"><%= author["username"] %></p>
+    </div>
+  </div>
+<% end %>
+
+  
+</div>
