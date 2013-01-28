@@ -122,16 +122,13 @@ class OpussesController < ApplicationController
       redirect_to '/opusses'
     end    
 
+
   end
 
   # Some other ones:
 
   #  authorfeed = get('feed/author.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :username => 'sb2uk', :limit => 31, :output => 'json'})
-  
-  #  myfeed = get('feed/feed.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31, :output => 'json'})
-  
-
-  # Show_all: The public feed from the Opuss firehose
+  #  myfeed = get('feed/feed.json', :query => {:session => '79b95801048b74977624fd143c9e9d0e', :limit => 31, :output => 'json'})  
   # Search: Find_by (Category or Hashtag)
   # Show Categories and View Those (eg: Everything, Jokes etc.)
 

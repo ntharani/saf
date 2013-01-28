@@ -4,7 +4,8 @@
 
 
 <div class="container">
-<h1><%= params[:id] %> is following:</h1>
+<h3><%= link_to "Back", author_path(params[:id]) %></h3>
+<strong><%= params[:id] %> is following:</strong>
 <hr>  
 
   <% @author["data"].each do |author| %>
@@ -16,6 +17,7 @@
       <p style="height:48px; overflow: auto; font-size:0.9em;"><%= author["username"] %></p>
     </div>
   </div>
+  <hr>
 <% end %>
 
   

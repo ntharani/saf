@@ -6,17 +6,27 @@ Saf::Application.routes.draw do
   
   resources :authors do
     member do
-      get :following
-      get :followed
+      get   :following
+      get   :followed
+      post  :follow
     end
   end
 
   resources :opusses do
+
+    resources :comments
+
     member  do
-      get :like
-      get :comment
-      get :authorfeed
+      get   :like
+      get   :authorfeed
+      post  :repost
     end
+
+# Moved to a nested resource instead
+#
+#    collection do
+#     get   :comments      
+#    end
   end
 
 
