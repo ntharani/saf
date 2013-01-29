@@ -1,0 +1,16 @@
+    <%= form_for(:comment, url: opuss_comments_path) do |f| %>
+
+    <div class="control-group opusscomment">
+      <%#= f.label :opuss, {class: "control-label"} %>
+      <div class="controls">
+        <%= f.text_area :thecomment, placeholder: 'What are you thinking?' %>
+      </div>
+    </div>
+
+    <div class="control-group">
+      <div class="controls">
+        <%= f.submit "Comment!", class: "btn btn-large btn-primary" %>
+      </div>
+    </div>
+
+    <% end %>

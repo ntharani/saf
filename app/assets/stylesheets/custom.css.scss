@@ -135,7 +135,6 @@ aside {
 
 
 .indexfeed {    
-  height: 44px;
   margin: auto;
 }
 
@@ -209,6 +208,13 @@ form {
   height: 150px;
   /* width: auto; */
 }
+
+.opusscomment textarea
+{
+  height: 50px;
+  /* width: auto; */
+}
+
 
 .opusstitle input
 {

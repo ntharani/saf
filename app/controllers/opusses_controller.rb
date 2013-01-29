@@ -44,6 +44,7 @@ class OpussesController < ApplicationController
     # opuss_path(opuss)
     @opuss = OpussApi.show_opuss(params[:id],cookies[:otoken])
     @showedit = cookies[:author_id]
+    @comments = OpussApi.view_comments(params[:id],cookies[:otoken]).parsed_response
     puts "In Opusses SHOW. Check for edit: Here is the author-id I captured during logon #{cookies[:author_id]}"
     # Use this author_id to compare to current author_id in the response object, if the two match
     # Show the "edit this Opuss" button

@@ -116,6 +116,18 @@ include HTTParty
     response = get('/author/followers.json', :query => {:session => token, :username => username, :limit => 31})
   end
 
+####### Relevant to Comments Controller 
+
+  def self.view_comments(opuss_id,token)
+    response = get('http://api.opuss.com/comment/comments.json', :query => {:session => token, :opuss_id => opuss_id})
+  end
+
+  def self.create_comment(opuss_id, token, opuss)
+    @result = post('http://api.opuss.com/comment/save.json',   :body => {:session => token, :opuss_id => opuss_id, :opuss => opuss } )
+  end
+    
+
+
   private
 
   def self.create_device_token

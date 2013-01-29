@@ -1,5 +1,7 @@
 Saf::Application.routes.draw do
   
+  get "comments/new"
+
   resources :users
   resources :sessions,  only: [:new, :create, :destroy]
   resources :osessions, only: [:new, :create, :destroy]
