@@ -122,8 +122,8 @@ include HTTParty
     response = get('http://api.opuss.com/comment/comments.json', :query => {:session => token, :opuss_id => opuss_id})
   end
 
-  def self.create_comment(opuss_id, token, opuss)
-    @result = post('http://api.opuss.com/comment/save.json',   :body => {:session => token, :opuss_id => opuss_id, :opuss => opuss } )
+  def self.create_comment(opuss_id,comment,token)
+    @result = post('http://api.opuss.com/comment/save.json', :body => {:session => token, :opuss_id => opuss_id, :comment => comment } )
   end
     
 

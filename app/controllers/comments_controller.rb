@@ -1,4 +1,5 @@
 class CommentsController < ApplicationController
+  include OpussApi
 
   def index # Show all Comments
     @comments = OpussApi.view_comments(params[:opuss_id],cookies[:otoken]).parsed_response
@@ -16,6 +17,18 @@ class CommentsController < ApplicationController
   end
 
   def create
+    puts "I have been called - the create action in Comments Create"
+    @response = OpussApi.create_comment(params[:opuss_id],params[:comment][:thecomment],cookies[:otoken])
+    puts @response["error_code"].to_s
+    puts "My session ID is #{cookies[:otoken]}"
+    if @response["error_code"].to_s !="200"
+      flash.now[:error] = 'Failed.  Please make sure your comment has content'
+      render 'new'
+    else
+      flash[:success] = 'Thanks!'
+      redirect_to '/opusses'
+    end
+
   end
 
 end
