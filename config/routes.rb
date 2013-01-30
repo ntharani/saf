@@ -1,7 +1,5 @@
 Saf::Application.routes.draw do
   
-  get "comments/new"
-
   resources :users
   resources :sessions,  only: [:new, :create, :destroy]
   resources :osessions, only: [:new, :create, :destroy]
@@ -23,12 +21,6 @@ Saf::Application.routes.draw do
       get   :authorfeed
       post  :repost
     end
-
-# Moved to a nested resource instead
-#
-#    collection do
-#     get   :comments      
-#    end
   end
 
 
@@ -44,7 +36,6 @@ Saf::Application.routes.draw do
   match '/top',      to: 'opusses#indextop'
   match '/profile',  to: 'authors#show'
   match '/like',     to: 'opusses#like'
-  match '/comment',  to: 'opusses#comment'
 
 
 # Static Pages Controller

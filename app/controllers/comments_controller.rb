@@ -23,7 +23,7 @@ class CommentsController < ApplicationController
     puts "My session ID is #{cookies[:otoken]}"
     if @response["error_code"].to_s !="200"
       flash.now[:error] = 'Failed.  Please make sure your comment has content'
-      render 'new'
+      render new_opuss_comment_path
     else
       flash[:success] = 'Thanks!'
       redirect_to '/opusses'
