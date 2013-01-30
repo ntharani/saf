@@ -21,11 +21,29 @@
           <%= @opuss["data"]["opuss"].gsub(/\n/, "<br/>").html_safe %>
       </div>
 
+    <hr>
  
- <!-- would be really nice to post to the comments/create action from here. I can 
-      render the comments but failing to sucessfully post from here
-      perhaps I need to create a deliberate member or match in routes.rb? 
-  -->
+    <%= form_for(:comment, :url => opuss_comments_path(@opuss["data"]["opuss_id"]) ) do |f| %>
+
+        <div class="control-group opusscomment">
+          <%#= f.label :opuss, {class: "control-label"} %>
+          <div class="controls">
+            <%= f.text_area :thecomment, placeholder: 'What did you think of this piece?' %>
+          </div>
+        </div>
+
+        <div class="control-group">
+          <div class="controls">
+
+          <%= form_for(:like, :url => { :action => "repost" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :like_id, :value => @opuss["data"]["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-large pull-left") do %><i class="icon-retweet"></i><% end %><% end %>
+
+          <%= form_for(:like, :url => { :action => "like" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :like_id, :value => @opuss["data"]["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-large pull-left") do %><i class="icon-heart"></i>&nbsp;&nbsp;&nbsp;<%= @opuss["data"]["numberOfLikes"] %><% end %><% end %>
+
+          <%= f.submit "Comment!", class: "btn btn-large btn-primary " %>
+          </div>
+        </div>
+
+    <% end %>
 
 <%#= render 'comments/aa' %>
 
@@ -49,29 +67,6 @@
     </div>
 
     <% end %>
-
-    <%= form_for(:comment, :url => opuss_comments_path(@opuss["data"]["opuss_id"]) ) do |f| %>
-
-    <div class="control-group opusscomment">
-      <%#= f.label :opuss, {class: "control-label"} %>
-      <div class="controls">
-        <%= f.text_area :thecomment, placeholder: 'What are you thinking?' %>
-      </div>
-    </div>
-
-    <div class="control-group">
-      <div class="controls">
-        <%= f.submit "Comment!", class: "btn btn-large btn-primary" %>
-      </div>
-    </div>
-
-    <% end %>
-
-
-    </div>
-
-
-
 </div>
 
 <% end %>

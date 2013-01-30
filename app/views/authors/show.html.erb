@@ -23,13 +23,21 @@
     <% if @showedit.to_s == @author["data"]["author_id"].to_s %>
       <li style="width:100%; text-align: center; font-size:0.9em;"><%= link_to "Edit My Profile", edit_author_path(@author) %></li>
     <%end %>
-
+    
   <!-- Need Logic Here to add a follow button.  The button should only be available on authors other the logged in
        user.  We need further logic to ensure that button that is rendered is appropriately named
        Follow or Unfollow based on whether there is an existing link.
    -->
 
   </ul>
+    
+    <% if @showedit.to_s != @author["data"]["author_id"].to_s %>
+
+    <div><%= form_for(:follow, :url => { :action => "follow" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :follow_id, :value => @author["data"]["author_id"] %><%= button_tag(type: 'submit', class: "btn btn-large pull-left ") do %>Follow <% end %><% end %>
+    </div>
+
+    <% end %>
+
   </div>
 
 
