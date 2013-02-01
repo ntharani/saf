@@ -25,16 +25,17 @@ Saf::Application.routes.draw do
 
 
   root               to: 'static_pages#home'
-  match '/signin',   to: 'sessions#new'
-  match '/signout',  to: 'sessions#destroy', via: :delete
-  match '/signup',   to: 'users#new'
+  #match '/signin',   to: 'sessions#new'
+  #match '/signout',  to: 'sessions#destroy', via: :delete
+  #match '/signup',   to: 'users#new'
   match '/help',     to: 'static_pages#help'
   match '/about',    to: 'static_pages#about'
   match '/contact',  to: 'static_pages#contact'
   match '/ologin',   to: 'osessions#new'
   match '/osignout', to: 'osessions#destroy', via: :delete
   match '/top',      to: 'opusses#indextop'
-  match '/profile',  to: 'authors#show'
+  match '/feed',     to: 'opusses#feed'
+  match '/search',   to: 'opusses#search'
 
 
 # Static Pages Controller

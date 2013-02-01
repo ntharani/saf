@@ -26,6 +26,10 @@ include HTTParty
     get('/feed/public.json', :query => {:session => token, :limit => 31})
   end
 
+  def self.feed(token)
+    get('/feed/feed.json', :query => {:session => token, :limit => 31})
+  end
+
   def self.top_feed(token)
     get('/feed/top.json', :query => {:period => 'today', :session => token, :limit => 31})
   end
@@ -34,6 +38,9 @@ include HTTParty
     get('/feed/author.json', :query => {:username => username, :session => token, :limit => 31})
   end
 
+  def self.search(criteria, token)
+    get('/feed/search.json', :query => {:criteria => criteria, :session => token, :limit => 31})
+  end
 
   def self.show_opuss(opuss,token)
     get('/opuss/opuss.json', :query => {:session => token, :opuss_id => opuss})
@@ -128,7 +135,7 @@ include HTTParty
 ####### Relevant to Comments Controller 
 
   def self.view_comments(opuss_id,token)
-    response = get('http://api.opuss.com/comment/comments.json', :query => {:session => token, :opuss_id => opuss_id})
+    response = get('http://api.opuss.com/comment/comments.json', :query => {:session => token, :opuss_id => opuss_id, :limit => 31})
   end
 
   def self.create_comment(opuss_id,comment,token)

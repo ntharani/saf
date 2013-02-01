@@ -39,6 +39,22 @@ class OpussesController < ApplicationController
     end
   end
 
+  def feed
+    @opusses = OpussApi.feed(cookies[:otoken]).parsed_response
+    if @opusses["data"].to_s == "No results"
+      flash[:error] = "No posts yet."
+      redirect_to '/opusses'
+    end    
+  end
+
+  def search
+    @opusses = OpussApi.search(params[:findopuss],cookies[:otoken]).parsed_response
+    if @opusses["data"].to_s == "No results"
+      flash[:error] = "No results. We're still refining search so please try another query. Thank you."
+      redirect_to '/opusses'
+    end        
+  end
+
   def show
     # Show a particular Opuss. =/opusses/id 
     # opuss_path(opuss)
