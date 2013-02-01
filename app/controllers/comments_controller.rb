@@ -18,17 +18,25 @@ class CommentsController < ApplicationController
 
   def create
     puts "I have been called - the create action in Comments Create"
-    @response = OpussApi.create_comment(params[:opuss_id],params[:comment][:thecomment],cookies[:otoken])
-    puts @response["error_code"].to_s
-    puts "My session ID is #{cookies[:otoken]}"
-    if @response["error_code"].to_s !="200"
-      flash.now[:error] = 'Failed.  Please make sure your comment has content'
-      render new_opuss_comment_path
-    else
-      flash[:success] = 'Thanks!'
-      redirect_to '/opusses'
-    end
+    if params[:comment][:thecomment].to_s.blank?
 
+      flash[:error] = "Can't be blank"
+      redirect_to new_opuss_comment_path
+
+    else
+
+      @response = OpussApi.create_comment(params[:opuss_id],params[:comment][:thecomment],cookies[:otoken])
+      puts @response["error_code"].to_s
+      puts "My session ID is #{cookies[:otoken]}"
+      if @response["error_code"].to_s !="200"
+        flash.now[:error] = 'Failed.  Please make sure your comment has content'
+      redirect_to new_opuss_comment_path
+      else
+        flash[:success] = 'Thanks!'
+        redirect_to '/opusses'
+      end
+
+    end
   end
 
 end

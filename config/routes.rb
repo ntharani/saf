@@ -17,7 +17,7 @@ Saf::Application.routes.draw do
     resources :comments
 
     member  do
-      get   :like
+      post  :like
       get   :authorfeed
       post  :repost
     end
@@ -35,7 +35,6 @@ Saf::Application.routes.draw do
   match '/osignout', to: 'osessions#destroy', via: :delete
   match '/top',      to: 'opusses#indextop'
   match '/profile',  to: 'authors#show'
-  match '/like',     to: 'opusses#like'
 
 
 # Static Pages Controller

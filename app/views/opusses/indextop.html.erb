@@ -12,7 +12,7 @@
       <% end %>
     </div>
 
-    <div><%= form_for(:like, :url => { :action => "like" }, :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :like_id, :value => opuss["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-large pull-right indexfeed") do %><i class="icon-heart"></i>&nbsp;&nbsp;&nbsp; <%= opuss["numberOfLikes"] %><% end %><% end %>
+    <div><%= form_for(:like, :url => like_opuss_path(opuss["opuss_id"]), :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :like_id, :value => opuss["opuss_id"] %><%= button_tag(type: 'submit', class: "btn btn-large pull-right indexfeed") do %><i class="icon-heart"></i>&nbsp;&nbsp;&nbsp; <%= opuss["numberOfLikes"] %><% end %><% end %>
     </div>
   </div>
 
@@ -37,7 +37,6 @@
 
 <hr>
 
+<% end %>
 
 
-
-  <% end %>

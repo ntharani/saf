@@ -121,9 +121,21 @@ class OpussesController < ApplicationController
     else
       flash[:success] = 'Liked!'
       redirect_to '/opusses'
+    end
+  end    
+
+
+  def repost
+    @rresponse = OpussApi.repost_opuss(params[:repost][:opuss_id],cookies[:otoken])
+    puts "In the repost method, I'm getting: #{@rresponse["error_code"].to_s}"
+    if @rresponse["error_code"].to_s !="200"
+      puts @rresponse["data"].to_s
+      flash[:error] = 'Failed, you can not repost your own opuss, please email support if you need assistance'
+      redirect_to '/opusses'
+    else
+      flash[:success] = 'Reposted!'
+      redirect_to '/opusses'
     end    
-
-
   end
 
   # Some other ones:

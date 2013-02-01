@@ -58,6 +58,10 @@ include HTTParty
     @result = post('http://api.opuss.com/opuss/like.json',   :body => {:session => token, :opuss_id => opuss_id} )
   end
 
+  def self.repost_opuss(opuss_id, token)
+    @result = post('http://api.opuss.com/opuss/repost.json',   :body => {:session => token, :opuss_id => opuss_id} )
+  end
+
 ####### Relevant to Osessions Controller 
 
   def self.osigned_in?
@@ -115,6 +119,11 @@ include HTTParty
   def self.author_followers(username,token)
     response = get('/author/followers.json', :query => {:session => token, :username => username, :limit => 31})
   end
+
+  def self.author_follow(username,token)
+    @result = post('http://api.opuss.com/author/follow.json', :body => {:session => token, :username => username } )
+  end
+
 
 ####### Relevant to Comments Controller 
 

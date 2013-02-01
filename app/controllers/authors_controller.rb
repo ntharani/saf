@@ -54,6 +54,19 @@ class AuthorsController < ApplicationController
     @author = OpussApi.author_followers(params[:id],cookies[:otoken]).parsed_response
   end
 
+  def follow
+    @fresponse = OpussApi.author_follow(params[:follow][:follow_id],cookies[:otoken])
+    if @fresponse["error_code"].to_s !="200"
+      puts @lresponse["data"].to_s
+      flash[:error] = 'Failed. Please email support@opuss.com with the OpussID'
+      redirect_to author_path(params[:follow][:follow_id])
+    else
+      flash[:success] = 'Done!'
+      redirect_to author_path(params[:follow][:follow_id])
+    end    
+
+  end
+
 
   private
 
