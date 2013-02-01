@@ -1,5 +1,8 @@
 class StaticPagesController < ApplicationController
   def home
+  if oosigned_in?
+    redirect_to feed_path
+  end
   end
 
   def about

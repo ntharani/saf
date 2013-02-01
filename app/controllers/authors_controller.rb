@@ -35,12 +35,23 @@ class AuthorsController < ApplicationController
 
 
   def edit
-    # This screen will render the Authors Opuss profile
+    @response = OpussApi.show_author(params[:id],cookies[:otoken])
+    unless @response["data"]["author_id"].to_s == cookies[:author_id].to_s
+      redirect_to root_url, notice: "Tsk Tsk. You can't edit someone elses profile"
+    end
   end
 
 
   def update
     # This screen will update the Authors profile.
+    @uresponse = OpussApi.author_edit(params[:author][:name],params[:author][:email],params[:author][:bio],cookies[:otoken])
+    if @uresponse["error_code"].to_s !="200"
+      flash.now[:error] = 'Failed.  Please make sure your profile has content'
+      render 'edit'
+    else
+      flash[:success] = 'Updated!'
+      redirect_to author_path(params[:id])
+    end
   end
 
   def destroy

@@ -1,0 +1,49 @@
+<%= provide(:title, "Edit your profile") %>
+
+ <p><%#= @author %></p> 
+ <p><%#= @news %></p> 
+
+
+<div class="container">
+
+<div class="row-fluid">
+  <div class="span6">
+
+    <%= form_for(:author, :url => { :action => "update" }, :html => { :method => 'put' } ) do |f| %>
+
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_field  :name, :value => @response["data"]["name"], placeholder: 'Title' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_field  :email, :value => @response["data"]["email"], placeholder: 'Title' %>
+        </div>
+      </div>
+
+      <div class="control-group opussheight">
+        <%#= f.label :opuss, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_area :bio, :value => @response["data"]["bio"], placeholder: 'Bio' %>
+        </div>
+      </div>
+
+    <div class="control-group">
+        <div class="controls">
+        <%= f.submit "Update Profile", class: "btn btn-large btn-primary" %>
+        </div>
+    </div>
+
+
+    <% end %>
+  </div>
+</div>
+  
+
+
+</div>
+

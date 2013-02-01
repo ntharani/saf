@@ -109,6 +109,11 @@ include HTTParty
     return response
   end
 
+  def self.author_edit(name,email,bio,token)
+    @result = post('http://api.opuss.com/author/edit.json', :body => {:session => token, :name => name, :email => email, :bio => bio } )
+  end
+
+
   def self.author_news(token)
     response = get('/news/news.json', :query => {:session => token})
     return response
