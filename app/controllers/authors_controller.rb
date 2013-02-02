@@ -31,6 +31,7 @@ class AuthorsController < ApplicationController
 
   def create
     # This will receive instructions from either the new #POST action or Singly.
+    
   end
 
 
