@@ -1,3 +1,4 @@
+
 <%= provide(:title, "#{@opuss["data"]["title"]} by @#{@opuss["data"]["author"]["username"]}") %>
 
 
@@ -60,7 +61,7 @@
 <% if @comments["data"].to_s != "No results" %>
 
 <div>
-
+<br>
 <hr>
 
 <% @comments["data"].each do |comment| %>
@@ -69,8 +70,9 @@
       <%= link_to(safe_image_tag(comment["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => comment["username"]), :class => "pull-left" ) %>
 
       <div class="media-body">
-        <i><p><%= comment["username"] %></p></i>
+        <i><%= comment["username"] %></i>
         <p style="height:48px; font-size:0.9em;"><%= comment["comment"] %></p>
+        <p style="font-size:0.8em;" class="pull-right"><%= distance_of_time_in_words(comment["creation_date"], Time.now.utc)%> ago</p>
       </div>
     </div>
 
