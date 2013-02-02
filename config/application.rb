@@ -66,5 +66,6 @@ module Saf
     config.assets.version = '1.0'
 
     config.autoload_paths += %W(#{config.root}/lib)
+    config.logger = Logger.new(STDOUT) # From Unicorn Blog post @ http://blog.codeship.io/2012/05/06/Unicorn-on-Heroku.html
   end
 end
