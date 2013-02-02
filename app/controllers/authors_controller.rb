@@ -32,8 +32,8 @@ class AuthorsController < ApplicationController
 
   def new
       if oosigned_in?
-        flash.now[:error] = 'Please explicitly sign out first'
-        render 'new'
+        flash[:error] = 'Please explicitly sign out first'
+        redirect_to opusses_path
       end
     # This form will be for a new author.
     # Sign up socially (via Singly) or Through a regular form.
@@ -45,7 +45,7 @@ class AuthorsController < ApplicationController
       puts "Passwords are not blank and match"
     else
       flash.now[:error] = 'Password does not match and must not be blank'
-      render 'new'
+      render 'new' and return
     end
       
     @bresponse = OpussApi.username(params[:author][:username]).parsed_response
@@ -54,7 +54,7 @@ class AuthorsController < ApplicationController
       puts "It's available"
     else
       flash.now[:error] = 'Username not available'
-      render 'new'
+      render 'new' and return
     end
 
     @cresponse = OpussApi.author_register(params[:author][:username],params[:author][:email].downcase,params[:author][:password])
@@ -64,7 +64,7 @@ class AuthorsController < ApplicationController
       redirect_to ologin_path
     else
       flash.now[:error] = 'Something went wrong, please email support@opuss.com. Thanks.'
-      render 'new'
+      render 'new' and return
     end
   end
 
