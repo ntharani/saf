@@ -121,13 +121,13 @@ include HTTParty
 
   def self.author_news(token)
     # This is news about the logged in user.
-    response = get('/news/news.json', :query => {:session => token})
+    response = get('/news/news.json', :query => {:session => token, :limit => 31})
     return response
   end
 
   def self.vauthor_news(username,token)
     # This is news about an author being viewed, but *not* the logged in user.
-    response = get('/news/author.json', :query => {:session => token, :username => username})
+    response = get('/news/author.json', :query => {:session => token, :username => username, :limit => 31})
     return response
   end
 

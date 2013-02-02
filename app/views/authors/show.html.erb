@@ -98,7 +98,7 @@
             <% if @vnews["data"].to_s != "No results" %>
               <% @vnews["data"].each do |author| %>
                 <div>
-                  <%= link_to(safe_image_tag(author["receiver_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => author["sender_author"]["username"]), :class => "pull-left" ) %>
+                  <%= link_to(safe_image_tag(author["receiver_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => author["receiver_author"]["username"]), :class => "pull-left" ) %>
                   <div class="media-body">
                     <!--<h4 class="media-heading">Title</h4>-->
                     <p style="height:48px; overflow: auto; font-size:0.9em;"><%= author["message"] %></p>
