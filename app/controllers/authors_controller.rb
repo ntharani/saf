@@ -1,5 +1,5 @@
 class AuthorsController < ApplicationController
-  before_filter :osigned_in_user,  only: [:index, :indextop, :new, :edit, :show]
+  before_filter :osigned_in_user,  except: [:new, :create]
   include OpussApi
 
   # Basic REST Actions..

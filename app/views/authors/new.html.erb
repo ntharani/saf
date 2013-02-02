@@ -1,0 +1,64 @@
+<%= provide(:title, "Sign Up!") %>
+
+ <p><%#= @author %></p> 
+ <p><%#= @news %></p> 
+
+
+<div class="container">
+
+<div class="row-fluid">
+  <div class="span6">
+
+    <%= form_for(:author, :url => { :action => "create" }, :html => { :method => 'post' } ) do |f| %>
+
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.text_field  :username, placeholder: 'Username' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.email_field  :email, placeholder: 'Email Address' %>
+        </div>
+      </div>
+
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.password_field  :password, placeholder: 'Password' %>
+        </div>
+      </div>
+
+
+      <div class="control-group">
+        <%#= f.label :title, {class: "control-label"} %>
+        <div class="controls">
+        <%= f.password_field  :password_verify, placeholder: 'Password Verify' %>
+        </div>
+      </div>
+
+<!--      <div class="control-group opussheight">
+        <%#= f.label :opuss, {class: "control-label"} %>
+        <div class="controls">
+        <%#= f.text_area :bio, placeholder: 'Bio' %>
+        </div>
+      </div>
+-->
+    <div class="control-group">
+        <div class="controls">
+        <%= f.submit "Sign up!", class: "btn btn-large btn-primary" %>
+        </div>
+    </div>
+
+
+    <% end %>
+  </div>
+</div>
+  
+
+
+</div>
+

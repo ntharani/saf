@@ -4,7 +4,7 @@ Saf::Application.routes.draw do
   resources :sessions,  only: [:new, :create, :destroy]
   resources :osessions, only: [:new, :create, :destroy]
   
-  resources :authors do
+  resources :authors, except: [:index] do
     member do
       get   :following
       get   :followed

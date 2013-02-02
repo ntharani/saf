@@ -1,5 +1,5 @@
 class OpussesController < ApplicationController
-  before_filter :osigned_in_user,  only: [:index, :indextop, :new, :edit, :show]
+  before_filter :osigned_in_user
   include OpussApi
 
   # Basic REST Actions..

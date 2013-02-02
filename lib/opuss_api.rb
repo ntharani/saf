@@ -113,6 +113,11 @@ include HTTParty
     @result = post('http://api.opuss.com/author/edit.json', :body => {:session => token, :name => name, :email => email, :bio => bio } )
   end
 
+  def self.author_register(username, email, password)
+    create_device_token
+    @result = post('http://api.opuss.com/author/register.json', :body => {:username => username, :email => email, :password => password, :device_token => @device_token } )
+  end
+
 
   def self.author_news(token)
     response = get('/news/news.json', :query => {:session => token})
