@@ -34,7 +34,7 @@ Saf::Application.routes.draw do
   match '/ologin',   to: 'osessions#new'
   match '/osignout', to: 'osessions#destroy', via: :delete
   match '/top',      to: 'opusses#indextop'
-  match '/feed',     to: 'opusses#feed'
+  match '/all',      to: 'opusses#all_opusses'
   match '/search',   to: 'opusses#search'
 
 

@@ -20,18 +20,52 @@ class AuthorsController < ApplicationController
     # Use this author_id to compare to current author_id in the response object, if the two match
     # Show the "edit this Opuss" button
     @showedit = cookies[:author_id]
-    @news = OpussApi.author_news(cookies[:otoken])
-    @liked = OpussApi.author_liked(cookies[:otoken])
+    if @showedit.to_s == @author["data"]["author_id"].to_s
+      @news = OpussApi.author_news(cookies[:otoken])
+      @liked = OpussApi.author_liked(cookies[:otoken])
+    else
+      @liked = OpussApi.author_liked(cookies[:otoken])
+
+      @vnews = OpussApi.vauthor_news(@author["data"]["username"],cookies[:otoken])
+    end
   end
 
   def new
+      if oosigned_in?
+        flash.now[:error] = 'Please explicitly sign out first'
+        render 'new'
+      end
     # This form will be for a new author.
     # Sign up socially (via Singly) or Through a regular form.
   end
 
   def create
     # This will receive instructions from either the new #POST action or Singly.
-    
+    if params[:author][:password] == params[:author][:password_verify] && !params[:author][:password].blank?
+      puts "Passwords are not blank and match"
+    else
+      flash.now[:error] = 'Password does not match and must not be blank'
+      render 'new'
+    end
+      
+    @bresponse = OpussApi.username(params[:author][:username]).parsed_response
+    puts @bresponse
+    if @bresponse["error_code"].to_s == "200"
+      puts "It's available"
+    else
+      flash.now[:error] = 'Username not available'
+      render 'new'
+    end
+
+    @cresponse = OpussApi.author_register(params[:author][:username],params[:author][:email].downcase,params[:author][:password])
+    if @cresponse["error_code"].to_s == "200"
+      puts "Wahey! you're in!"
+      flash[:sucess] = "Signup successful, please login with your new details"
+      redirect_to ologin_path
+    else
+      flash.now[:error] = 'Something went wrong, please email support@opuss.com. Thanks.'
+      render 'new'
+    end
   end
 
 

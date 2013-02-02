@@ -53,46 +53,67 @@
       <li class="active"><a href="#tab1" data-toggle="tab">News</a></li>
       <li><a href="#tab2" data-toggle="tab">Liked</a></li>
       <% else %>
-      <li class="active"><a href="#tab2" data-toggle="tab">Liked</a></li>
+      <li class="active"><a href="#tab2" data-toggle="tab">Activity</a></li>
       <% end %>
     </ul>
   </div>
 
   <div class="tab-content">
         <% if @showedit.to_s == @author["data"]["author_id"].to_s %>
-        <div class="tab-pane active" id="tab1">
+          <div class="tab-pane active" id="tab1">
 
-        <% if @news["data"].to_s != "No results" %>
-        <% @news["data"].each do |news| %>
-          <div>
-            <%= link_to(safe_image_tag(news["sender_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => news["sender_author"]["username"]), :class => "pull-left" ) %>
+          <% if @news["data"].to_s != "No results" %>
+            <% @news["data"].each do |news| %>
+              <div>
+                <%= link_to(safe_image_tag(news["sender_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => news["sender_author"]["username"]), :class => "pull-left" ) %>
 
-            <div class="media-body">
-              <!--<h4 class="media-heading">Title</h4>-->
-              <p style="height:48px; overflow: auto; font-size:0.9em;"><%= news["message"] %></p>
-            </div>
+                <div class="media-body">
+                <!--<h4 class="media-heading">Title</h4>-->
+                <p style="height:48px; overflow: auto; font-size:0.9em;"><%= news["message"] %></p>
+                </div>
+              </div>
+            <% end %>
+          <% end %>
           </div>
         <% end %>
-        <% end %>
-        <% end %>
-        </div>
 
-    <% if @showedit.to_s == @author["data"]["author_id"].to_s %>
-    <div class="tab-pane" id="tab2">
-    <%else%>
-    <div class="tab-pane active" id="tab2">
-      <%end%>
+        <% if @showedit.to_s == @author["data"]["author_id"].to_s %>
+          <div class="tab-pane" id="tab2">
+            <% if @liked["data"].to_s != "No results" %>
+              <% @liked["data"].each do |like| %>
+                <div>
+                  <%= link_to(safe_image_tag(like["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => like["author"]["username"]), :class => "pull-left" ) %>
+                  <div class="media-body">
+                    <!--<h4 class="media-heading">Title</h4>-->
+                    <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to like["title"], opuss_path(:id => like["opuss_id"]) %></p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
 
-      <% @liked["data"].each do |like| %>
-      <div>
-          <%= link_to(safe_image_tag(like["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => like["author"]["username"]), :class => "pull-left" ) %>
-        <div class="media-body">
-          <!--<h4 class="media-heading">Title</h4>-->
-          <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to like["title"], opuss_path(:id => like["opuss_id"]) %></p>
-        </div>
-      </div>
-      <% end %>
 
-    </div>
+        <%else%>
+          <div class="tab-pane active" id="tab2">
+            <% if @vnews["data"].to_s != "No results" %>
+              <% @vnews["data"].each do |author| %>
+                <div>
+                  <%= link_to(safe_image_tag(author["receiver_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => author["sender_author"]["username"]), :class => "pull-left" ) %>
+                  <div class="media-body">
+                    <!--<h4 class="media-heading">Title</h4>-->
+                    <p style="height:48px; overflow: auto; font-size:0.9em;"><%= author["message"] %></p>
+                  </div>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+
+
+        <%end%>
+
+
+
+
+
   </div>
 </div>

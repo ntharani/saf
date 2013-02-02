@@ -120,7 +120,14 @@ include HTTParty
 
 
   def self.author_news(token)
+    # This is news about the logged in user.
     response = get('/news/news.json', :query => {:session => token})
+    return response
+  end
+
+  def self.vauthor_news(username,token)
+    # This is news about an author being viewed, but *not* the logged in user.
+    response = get('/news/author.json', :query => {:session => token, :username => username})
     return response
   end
 
@@ -139,6 +146,10 @@ include HTTParty
 
   def self.author_follow(username,token)
     @result = post('http://api.opuss.com/author/follow.json', :body => {:session => token, :username => username } )
+  end
+
+  def self.username(desired_name)
+    response = get('/author/username.json', :query => {:username => desired_name})
   end
 
 

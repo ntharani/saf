@@ -13,7 +13,11 @@ class OpussesController < ApplicationController
 #      puts "Yes Signed In"
 #      puts "the cookie value is #{cookies[:opuss_token]}"
       puts "I've been called for Opusses Index, I'm supplying this cookie: #{cookies[:otoken]}"
-      @opusses = OpussApi.public_feed(cookies[:otoken]).parsed_response
+      @opusses = OpussApi.feed(cookies[:otoken]).parsed_response
+      if @opusses["data"].to_s == "No results"
+        flash[:error] = "No posts yet."
+        redirect_to '/opusses'
+      end    
 #    else
 #      puts "Not not signed in"
 #      flash[:notice] = 'Please sign in'
@@ -39,12 +43,8 @@ class OpussesController < ApplicationController
     end
   end
 
-  def feed
-    @opusses = OpussApi.feed(cookies[:otoken]).parsed_response
-    if @opusses["data"].to_s == "No results"
-      flash[:error] = "No posts yet."
-      redirect_to '/opusses'
-    end    
+  def all_opusses
+    @opusses = OpussApi.public_feed(cookies[:otoken]).parsed_response
   end
 
   def search
