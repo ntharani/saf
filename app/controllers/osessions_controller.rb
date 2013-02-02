@@ -24,26 +24,17 @@ include OpussApi
     puts "Here: #{@author}"
     puts "#{@author["error_code"]} "
     puts "Did anything print or does being back mean I have no access to it?"
-    cookies.permanent[:opuss_token] = @author["data"]["session_token"]
-    cookies.permanent[:author_id] = @author["data"]["author"]["author_id"]
-    cookies.permanent[:username] = @author["data"]["username"]
-    puts "The logon author_id (to compare when updating) direct: #{@author["data"]["author"]["author_id"]} "
-    puts "The session token direct: #{@author["data"]["session_token"]} "
-    puts "The cookie direct: #{cookies[:opuss_token]} "    
-    puts "The author cookie direct: #{cookies[:author_id]} "    
-    if @author["error_code"].to_s !="200"
+    if @author["error_code"].to_s != "200"
       flash.now[:error] = 'Invalid username or password'
-      render 'new'
-    else
+      render 'new' and return
+    end
+      puts "For some reason I think it's valid? Negative issue?"
+      cookies.permanent[:opuss_token] = @author["data"]["session_token"]
+      cookies.permanent[:author_id] = @author["data"]["author"]["author_id"]
+      cookies.permanent[:username] = @author["data"]["username"]
       oosign_in(@author)
       flash[:success] = "Welcome to Opuss!"
       redirect_back_or root_url
-    end
-#      puts "The session_token was nil, the user has been logged in now"
-#    else
-#      puts "A session exists, here's proof"
-      #puts @session_token
-#    end
   end
 
   def destroy

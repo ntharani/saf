@@ -87,8 +87,6 @@ include HTTParty
       puts "It's not sucessful!!!!"
     else
       puts "Yeah! it was successful #{@author_login["error_code"]}"
-      puts @author_login["data"]["author"]["name"]
-      @username = @author_login["data"]["author"]["username"]
       puts "This is the session token"
       @session_token = @author_login["data"]["session_token"]
       set_token(@session_token)
