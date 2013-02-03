@@ -144,6 +144,7 @@ class OpussesController < ApplicationController
   def repost
     @rresponse = OpussApi.repost_opuss(params[:repost][:opuss_id],cookies[:otoken])
     puts "In the repost method, I'm getting: #{@rresponse["error_code"].to_s}"
+    puts "The return repost object #{@rresponse}"
     if @rresponse["error_code"].to_s !="200"
       puts @rresponse["data"].to_s
       flash[:error] = 'Failed, you can not repost your own opuss, please email support if you need assistance'
