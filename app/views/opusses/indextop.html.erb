@@ -24,7 +24,7 @@
         <strong><%= link_to opuss["title"], opuss_path(:id => opuss["opuss_id"]) %></strong>
   </div>
 
-  <div>
+  <div style="max-height:100px; overflow: hidden;">
       <%= link_to truncate(opuss["opuss"], :length => 150).gsub(/\n/, '<br>').html_safe, opuss_path(:id => opuss["opuss_id"]) %>
   </div>
 
