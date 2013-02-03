@@ -18,7 +18,7 @@
           <i> By <%= link_to @opuss["data"]["author"]["name"], author_path(:id=>@opuss["data"]["author"]["username"])%></i>
         </div>
       </div>
-      <div>
+      <div class="showopuss">
         <hr />
           <%= @opuss["data"]["opuss"].gsub(/\n/, "<br/>").html_safe %>
       </div>
@@ -30,7 +30,7 @@
         <div class="control-group opusscomment">
           <%#= f.label :opuss, {class: "control-label"} %>
           <div class="controls">
-            <%= f.text_area :thecomment, placeholder: 'What did you think of this piece?' %>
+            <%= f.text_area :thecomment, placeholder: 'What did you think of this Opuss?' %>
           </div>
         </div>
 
