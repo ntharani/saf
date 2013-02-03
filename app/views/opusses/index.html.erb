@@ -6,7 +6,19 @@
   
   <div class="row">
 
-    <div><%= link_to(safe_image_tag(opuss["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64"),author_path(:id => opuss["author"]["username"]), :class => "pull-left" ) %></div>
+
+    <% if opuss["isRepost"].to_s.downcase == 'true' %>
+      <div style="position:absolute;z-index:0;"><%= link_to(safe_image_tag(opuss["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64"),author_path(:id => opuss["author"]["username"]), :class => "pull-left" ) %>
+        <div style="position:absolute;z-index:1;bottom:0;right:0;"><%= safe_image_tag(opuss["reposter"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "32x32") %>
+        </div>
+    </div>
+
+    <% else %>
+
+      <div><%= link_to(safe_image_tag(opuss["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64"),author_path(:id => opuss["author"]["username"]), :class => "pull-left" ) %></div>
+
+    <%end%>
+
 
     <% if opuss["author"]["username"].to_s.downcase == 'opuss' %>
     <% else %>
@@ -34,8 +46,11 @@
     <% end %>
   </div>
 
-  <div>
+  <div style="margin-top:5px;">
     <i><%= distance_of_time_in_words(opuss["created"], Time.now.utc)%> ago</i>
+    <% if opuss["isRepost"].to_s.downcase == 'true' %>
+        <i class="icon-retweet pull-right"></i>
+    <% end %>
   </div>
 
 
