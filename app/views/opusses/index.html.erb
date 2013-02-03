@@ -1,3 +1,4 @@
+<%# All Feed Views are idential, except this page! %>
 <%= provide(:title, "Your feed") %>
 
 <% @opusses["data"].each do |opuss| %>
@@ -38,7 +39,7 @@
         <strong><%= link_to opuss["title"], opuss_path(:id => opuss["opuss_id"]) %></strong>
   </div>
 
-  <div>
+  <div style="max-height:100px; overflow: hidden;">
     <% if opuss["author"]["username"].to_s.downcase == 'opuss' %>
       <%= link_to truncate(opuss["opuss"], :length => 290), '#' %>
     <% else %>
