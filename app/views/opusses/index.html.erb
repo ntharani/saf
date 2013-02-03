@@ -9,7 +9,7 @@
 
     <% if opuss["isRepost"].to_s.downcase == 'true' %>
       <div style="position:absolute;z-index:0;"><%= link_to(safe_image_tag(opuss["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64"),author_path(:id => opuss["author"]["username"]), :class => "pull-left" ) %>
-        <div style="position:absolute;z-index:1;bottom:0;right:0;"><%= safe_image_tag(opuss["reposter"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "32x32") %>
+        <div style="position:absolute;z-index:1;bottom:-2px;right:-2px;"><%= link_to(safe_image_tag(opuss["reposter"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "32x32"), author_path(:id => opuss["author"]["username"]), :class => "pull-left" ) %>
         </div>
     </div>
 
@@ -42,7 +42,7 @@
     <% if opuss["author"]["username"].to_s.downcase == 'opuss' %>
       <%= link_to truncate(opuss["opuss"], :length => 290), '#' %>
     <% else %>
-      <%= link_to truncate(opuss["opuss"], :length => 290), opuss_path(:id => opuss["opuss_id"]) %>
+      <%= link_to truncate(opuss["opuss"], :length => 150).gsub(/\n/, '<br>').html_safe, opuss_path(:id => opuss["opuss_id"]) %>
     <% end %>
   </div>
 
