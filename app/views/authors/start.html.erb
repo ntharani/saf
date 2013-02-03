@@ -1,0 +1,31 @@
+<%= provide(:title, 'Follow these folks to get started!') %>
+<%#= @sresponse %>
+<h2> Opusses are better with company!</h2>
+<p> Here are a few users to get your started: </p>
+<hr>
+<% @sresponse["data"].each do |author| %>
+
+<div class="container">
+  
+  <div class="row" style="height:100px; overflow: hidden;">
+    <div><%= link_to(safe_image_tag(author["avatar_url"], alt: "Avatar", class: "gravatar", size: "72x72"),author_path(:id => author["username"]), :class => "pull-left" ) %></div>
+    <div>
+      <h5 style="margin:0px;"><%= author["name"] %></h5>
+      <p style="height:55px; overflow: auto; font-size:0.8em;"><%= author["bio"] %></p>
+    </div>
+  </div>
+
+  <div>
+    <%= form_for(:follow, :url => start_follow_author_path(author["username"]), :html => { :method => 'post' } ) do |f| %> <%= f.hidden_field :follow_id, :value => author["username"] %><%= button_tag(type: 'submit', class: "btn btn-large pull-left ") do %>
+      Follow 
+      <% end %>
+    <% end %>
+  </div>
+
+
+</div>
+
+<hr>
+
+<% end %>
+

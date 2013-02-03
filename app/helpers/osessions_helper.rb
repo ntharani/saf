@@ -4,6 +4,7 @@ module OsessionsHelper
       puts "I'm in the OSESSIONS HELPER"
       cookies.permanent[:otoken] = ouser["data"]["session_token"]
       cookies.permanent[:username] = ouser["data"]["author"]["username"]
+      cookies.permanent[:author_id] = ouser["data"]["author"]["author_id"]
       puts "In the OSESSIONS helper, the cookie is: #{cookies[:otoken]}"
       self.ocurrent_user = ouser
   end

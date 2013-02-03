@@ -9,6 +9,7 @@ Saf::Application.routes.draw do
       get   :following
       get   :followed
       post  :follow
+      post  :start_follow
     end
   end
 
@@ -37,6 +38,7 @@ Saf::Application.routes.draw do
   match '/top',      to: 'opusses#indextop'
   match '/all',      to: 'opusses#all_opusses'
   match '/search',   to: 'opusses#search'
+  match '/start',    to: 'authors#start'
 
 
 # Static Pages Controller

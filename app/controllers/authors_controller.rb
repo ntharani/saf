@@ -60,8 +60,14 @@ class AuthorsController < ApplicationController
     @cresponse = OpussApi.author_register(params[:author][:username],params[:author][:email].downcase,params[:author][:password])
     if @cresponse["error_code"].to_s == "200"
       puts "Wahey! you're in!"
-      flash[:sucess] = "Signup successful, please login with your new details"
-      redirect_to ologin_path
+      @author = OpussApi.logon(params[:author][:username],params[:author][:password])
+      if @author["error_code"].to_s != "200"
+        flash.now[:error] = 'Invalid username or password'
+        render ologin_path and return
+      end
+      oosign_in(@author)
+      flash[:success] = "Welcome to Opuss!"
+      redirect_to start_path
     else
       flash.now[:error] = 'Something went wrong, please email support@opuss.com. Thanks.'
       render 'new' and return
@@ -101,6 +107,7 @@ class AuthorsController < ApplicationController
   end
 
   def follow
+    store_location
     @fresponse = OpussApi.author_follow(params[:follow][:follow_id],cookies[:otoken])
     if @fresponse["error_code"].to_s !="200"
       puts @lresponse["data"].to_s
@@ -111,6 +118,26 @@ class AuthorsController < ApplicationController
       redirect_to author_path(params[:follow][:follow_id])
     end    
 
+  end
+
+  def start_follow
+    store_location
+    @fresponse = OpussApi.author_follow(params[:follow][:follow_id],cookies[:otoken])
+    if @fresponse["error_code"].to_s !="200"
+      puts @lresponse["data"].to_s
+      flash[:error] = 'Failed. Please email support@opuss.com with the OpussID'
+      redirect_to author_path(params[:follow][:follow_id])
+    else
+      flash[:success] = 'Done!'
+      redirect_to start_path
+    end    
+
+  end
+
+
+
+  def start
+    @sresponse = OpussApi.suggest(cookies[:otoken])
   end
 
 

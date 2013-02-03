@@ -150,6 +150,10 @@ include HTTParty
     response = get('/author/username.json', :query => {:username => desired_name})
   end
 
+  def self.suggest(token)
+    response = get('/author/suggestion.json', :query => {:session => token})  
+  end
+
 
 ####### Relevant to Comments Controller 
 

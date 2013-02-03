@@ -28,10 +28,9 @@ include OpussApi
       flash.now[:error] = 'Invalid username or password'
       render 'new' and return
     end
-      puts "For some reason I think it's valid? Negative issue?"
-      cookies.permanent[:opuss_token] = @author["data"]["session_token"]
-      cookies.permanent[:author_id] = @author["data"]["author"]["author_id"]
-      cookies.permanent[:username] = @author["data"]["username"]
+      #cookies.permanent[:opuss_token] = @author["data"]["session_token"]
+      #cookies.permanent[:author_id] = @author["data"]["author"]["author_id"]
+      #cookies.permanent[:username] = @author["data"]["username"]
       oosign_in(@author)
       flash[:success] = "Welcome to Opuss!"
       redirect_back_or root_url
