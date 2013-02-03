@@ -3,7 +3,8 @@
     <div class="hero-unit">
       <h1>Opuss</h1>
       <p>When you can't go native</p>
-      <p><%= link_to "Sign In Now!", ologin_path, class: "btn btn-primary btn-large" %></p>
+      <p><%= link_to "Sign in", ologin_path, class: "btn btn-primary btn-large" %></p>
+      <p><%= link_to "Sign up", signup_path, class: "btn btn-primary btn-large" %></p>
       <p><% puts "The cookie I have is #{cookies[:opuss_token]}" %></p>
     </div>
     <!-- Example row of columns 
