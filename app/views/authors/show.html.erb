@@ -109,9 +109,8 @@
                     <% if author["type"].to_s.downcase == "FOLLOW" %>
                       <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to author["message"], author_path(author["receiver_author"]["username"]) %></p>
                     <% else %>
-                      <% if author["opuss"].to_s != 'null' %>
+                      <% if author["opuss"].blank? %>
                         <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to author["message"], '#' %></p>
-
                       <%else%>
                         <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to author["message"], opuss_path(author["opuss"]["opuss_id"]) %></p>
                       <%end%>
