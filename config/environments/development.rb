@@ -36,5 +36,5 @@ Saf::Application.configure do
   config.assets.debug = true
 
   # Redis Setup 3.02.2013
-  ENV["REDISTOGO_URL"] = 'redis://redistogo:4edefa67914924c31bed773e9152a89c@dory.redistogo.com:9636/'
+  #ENV["REDISTOGO_URL"] = 'redis://redistogo:4edefa67914924c31bed773e9152a89c@dory.redistogo.com:9636/'
 end

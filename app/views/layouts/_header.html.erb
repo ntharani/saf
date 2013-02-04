@@ -7,7 +7,7 @@
         <span class="icon-bar"></span>
       </a>
 
-       <a class="brand hidden-phone hidden-tablet" href="<%=root_path%>">Opuss</a> 
+       <a class="brand hidden-phone hidden-tablet" href="<%=root_path%>"><%= image_tag("opusslogo.png", :alt => "Opusslogo") %></a> 
 
         <ul class="nav">
           <li class="<%= 'active' if current_page?(opusses_path) %>"><%= link_to '<i class="icon-book"></i> Feed'.html_safe, opusses_path %></li>
