@@ -158,37 +158,6 @@ form {
   }
 
 
-.ousers {
-  list-style: none;
-  margin: 0;
-  background-color: #f7f7f9;
-  
-  li {
-    overflow: auto;
-    padding: 10px;
-    font-family: 'Open Sans Condensed', sans-serif;
-    font-size: 1.2em;
-
-
-    &:first-child {
-        border-top: 1px solid $grayLighter;
-    }
-
-    a {
-    color: $grayDark;
-    }
-    
-    a:hover { text-decoration: none; 
-    }
-
-    &:last-child {
-    padding: 0px 0px 0px 10px;
-    border-bottom: 1px solid $grayLighter;
-    background-color: #FFF8DC;
-    }
-  }
-
-}
 
 .showopuss {
   font-family: 'Copse', serif;
@@ -202,6 +171,18 @@ form {
   .by {
     font-size: 0.8em;
   }
+}
+
+.newsfeed {
+
+  a {
+    color: $grayDark;
+  }
+    
+  a:hover { text-decoration: none; 
+
+  }
+
 }
 
 /* Pretty CSS Forms
