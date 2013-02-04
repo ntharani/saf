@@ -105,10 +105,16 @@
                   <%= link_to(safe_image_tag(author["receiver_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => author["receiver_author"]["username"]), :class => "pull-left" ) %>
                   <div class="media-body newsfeed">
                     <!--<h4 class="media-heading">Title</h4>-->
+
                     <% if author["type"].to_s.downcase == "FOLLOW" %>
                       <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to author["message"], author_path(author["receiver_author"]["username"]) %></p>
                     <% else %>
-                      <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to author["message"], opuss_path(author["opuss"]["opuss_id"]) %></p>
+                      <% if author["opuss"].to_s != 'null' %>
+                        <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to author["message"], '#' %></p>
+
+                      <%else%>
+                        <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to author["message"], opuss_path(author["opuss"]["opuss_id"]) %></p>
+                      <%end%>
                     <% end %>
                   </div>
                 </div>
