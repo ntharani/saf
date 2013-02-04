@@ -12,7 +12,7 @@ gem 'json'
 gem 'thin'
 gem 'unicorn'
 gem 'redis'
-
+gem 'omniauth-singly'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
