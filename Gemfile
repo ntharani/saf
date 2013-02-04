@@ -11,7 +11,7 @@ gem 'httparty'
 gem 'json'
 gem 'thin'
 gem 'unicorn'
-#gem 'redis'
+gem 'redis'
 
 
 group :development, :test do
