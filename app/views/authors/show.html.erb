@@ -69,7 +69,11 @@
 
                 <div class="media-body">
                 <!--<h4 class="media-heading">Title</h4>-->
-                <p style="height:48px; overflow: auto; font-size:0.9em;"><%= news["message"] %></p>
+                  <% if news["type"].to_s.downcase == "follow" %>
+                    <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to news["message"], author_path(news["sender_author"]["username"]) %></p>
+                  <% else %>
+                    <p style="height:48px; overflow: auto; font-size:0.9em;"><%= link_to news["message"], opuss_path(news["opuss"]["opuss_id"]) %></p>
+                  <% end %>
                 </div>
               </div>
             <% end %>
