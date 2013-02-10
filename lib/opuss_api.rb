@@ -15,8 +15,7 @@ include HTTParty
 # Also the include HTTParty is overriding ruby expected behaviour by
 # extending class methods to this. Extend HTTParty doesn't seem to work
 
-  API_KEY = 'gHy7sX007Vv'
-  default_params :api_key => API_KEY
+  default_params :api_key => ENV['API_KEY']
   base_uri 'http://api.opuss.com'
   format :json
 

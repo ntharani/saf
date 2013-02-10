@@ -25,20 +25,24 @@ Saf::Application.routes.draw do
   end
 
 
-  root               to: 'static_pages#home'
-  #match '/signin',   to: 'sessions#new'
-  #match '/signout',  to: 'sessions#destroy', via: :delete
-  #match '/signup',   to: 'users#new'
-  match '/signup',   to: 'authors#new'
-  match '/help',     to: 'static_pages#help'
-  match '/about',    to: 'static_pages#about'
-  match '/contact',  to: 'static_pages#contact'
-  match '/ologin',   to: 'osessions#new'
-  match '/osignout', to: 'osessions#destroy', via: :delete
-  match '/top',      to: 'opusses#indextop'
-  match '/all',      to: 'opusses#all_opusses'
-  match '/search',   to: 'opusses#search'
-  match '/start',    to: 'authors#start'
+  root                            to: 'static_pages#home'
+  #match '/signin',               to: 'sessions#new'
+  #match '/signout',              to: 'sessions#destroy', via: :delete
+  #match '/signup',               to: 'users#new'
+  match '/signup',                to: 'authors#new'
+  match '/help',                  to: 'static_pages#help'
+  match '/about',                 to: 'static_pages#about'
+  match '/contact',               to: 'static_pages#contact'
+  match '/ologin',                to: 'osessions#new'
+  match '/osignout',              to: 'osessions#destroy', via: :delete
+  match '/top',                   to: 'opusses#indextop'
+  match '/all',                   to: 'opusses#all_opusses'
+  match '/search',                to: 'opusses#search'
+  match '/start',                 to: 'authors#start'
+  match 'auth/:service',          to: 'auth#service'
+  match 'auth/:service/callback', to: 'auth#callback'
+  match 'logout',                 to: 'auth#logout'
+
 
 
 # Static Pages Controller

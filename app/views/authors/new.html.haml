@@ -1,0 +1,29 @@
+= provide(:title, "Sign Up!")
+
+-# @author
+-# @news 
+
+.container
+
+.row-fluid
+  .span4.offset3
+    = form_for(:author, :url => { :action => "create" }, :html => { :method => 'post' } ) do |f|
+      .control-group
+        .controls
+          = f.text_field  :username, placeholder: 'Username'
+
+      .control-group
+        .controls
+          = f.email_field  :email, placeholder: 'Email Address'
+
+      .control-group
+        .controls
+          = f.password_field  :password, placeholder: 'Password'
+
+      .control-group
+        .controls
+          = f.password_field  :password_verify, placeholder: 'Password Verify'
+
+      .control-group
+        .controls
+          = f.submit "Sign up!", class: "btn btn-large btn-primary"

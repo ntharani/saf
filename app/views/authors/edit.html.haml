@@ -1,0 +1,24 @@
+= provide(:title, "Edit your profile")
+
+-# = @author
+-# = @news
+
+
+.container
+  .row-fluid
+    = form_for(:author, :url => { :action => "update" }, :html => { :method => 'put' } ) do |f|
+      .control-group
+        .controls
+          = f.text_field  :name, :value => @response["data"]["name"], placeholder: 'Title'
+
+      .control-group
+        .controls
+          = f.text_field  :email, :value => @response["data"]["email"], placeholder: 'Title'
+
+      .control-group.opussheight
+        .controls
+          = f.text_area :bio, :value => @response["data"]["bio"], placeholder: 'Bio'
+
+      .control-group
+        .controls
+          = f.submit "Update Profile", class: "btn btn-large btn-primary"

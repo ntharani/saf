@@ -1,0 +1,21 @@
+= provide(:title, params[:id])
+-# @author
+-# @news
+
+.container
+%h3
+  = link_to "Back", author_path(params[:id])
+%strong
+  = params[:id]
+  is following:
+%hr  
+
+- @author["data"].each do |author|
+  .media
+    = link_to(safe_image_tag(author["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => author["username"]), :class => "pull-left" )
+
+    .media-body
+      %h4.media-heading
+        = author["name"]
+      %p
+        = author["username"]

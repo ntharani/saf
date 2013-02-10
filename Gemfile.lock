@@ -94,6 +94,7 @@ GEM
     guard-spork (0.3.2)
       guard (>= 0.8.4)
       spork (>= 0.8.4)
+    haml (3.1.4)
     hashie (1.2.0)
     hike (1.2.1)
     httparty (0.9.0)
@@ -243,6 +244,7 @@ DEPENDENCIES
   growl (= 1.0.3)
   guard-rspec (= 0.5.5)
   guard-spork (= 0.3.2)
+  haml
   httparty
   jquery-rails (= 2.0.2)
   json

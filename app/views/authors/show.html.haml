@@ -1,0 +1,93 @@
+= provide(:title, @author["data"]["username"])
+
+ 
+-# @author
+-# @news
+
+
+.container
+  
+  .row{:style => "height:100px; overflow: hidden;" }
+    %div
+      = safe_image_tag(@author["data"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "72x72")
+    %div
+      %h5{:style=> "margin:0px;" }
+        = @author["data"]["name"]
+      %p{:style=> "height:55px; overflow: auto; font-size:0.8em;" }
+        = @author["data"]["bio"]
+  
+  %div
+    %ul.nav.nav-pills
+      %li{:style=> "width:90px; text-align: center; font-size:0.9em;"}
+        = link_to content_tag(:span, @author["data"]["numberOfWorks"], :class => "badge badge-info") + "Opusses", authorfeed_opuss_path(:id =>@author["data"]["username"])
+      %li{:style=> "width:90px; text-align: center; font-size:0.9em;"}
+        = link_to content_tag(:span, @author["data"]["numberFollowing"], :class => "badge badge-info") + "Following", following_author_path(:id =>@author["data"]["username"])
+      %li{:style=> "width:90px; text-align: center; font-size:0.9em;"}
+        = link_to content_tag(:span, @author["data"]["numberOfFollowers"], :class => "badge badge-info") + "Followers", followed_author_path(:id =>@author["data"]["username"])
+      -if @showedit.to_s == @author["data"]["author_id"].to_s
+        %ul.nav.nav-pills
+          %li{:style=> "width:100%; text-align: center; font-size:0.9em;"}
+            = link_to "Edit My Profile", edit_author_path(@author)
+
+  %div
+    -if @showedit.to_s != @author["data"]["author_id"].to_s
+      = form_for(:follow, :url => { :action => "follow" }, :html => { :method => 'post' } ) do |f|
+        = f.hidden_field :follow_id, :value => @author["data"]["username"]
+        = button_tag(type: 'submit', class: "btn btn-large pull-left ") do 
+          - if @author["data"]["isFollowed"].to_s == 'true'
+            UnFollow
+          - else
+            Follow
+
+  %div
+    %ul.nav.nav-tabs{:style=> "font-size: 0.9em;"}
+      - if @showedit.to_s == @author["data"]["author_id"].to_s
+        %li.active
+          <a href="#tab1" data-toggle="tab">News</a>
+        %li
+          <a href="#tab2" data-toggle="tab">Liked</a>
+      - else
+        %li.active
+          <a href="#tab2" data-toggle="tab">Activity</a>
+
+  .tab-content
+    - if @showedit.to_s == @author["data"]["author_id"].to_s
+      #tab1.tab-pane.active
+        - if @news["data"].to_s != "No results"
+          - @news["data"].each do |news|
+            %div
+              = link_to(safe_image_tag(news["sender_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => news["sender_author"]["username"]), :class => "pull-left" )
+              .media-body.newsfeed
+                -if news["type"].to_s.downcase == "follow"
+                  %p{:style=>"height:48px; overflow: auto; font-size:0.9em;"}
+                    = link_to news["message"], author_path(news["sender_author"]["username"])
+                - else
+                  %p{:style=>"height:48px; overflow: auto; font-size:0.9em;"}
+                    = link_to news["message"], opuss_path(news["opuss"]["opuss_id"])
+
+      #tab2.tab-pane
+        -if @liked["data"].to_s != "No results"
+          - @liked["data"].each do |like|
+            %div
+              = link_to(safe_image_tag(like["author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => like["author"]["username"]), :class => "pull-left" )
+              .media-body.newsfeed
+                %p{:style=>"height:48px; overflow: auto; font-size:0.9em;"}
+                  = link_to like["title"], opuss_path(:id => like["opuss_id"])
+
+    - else
+      #tab2.tab-pane.active
+        - if @vnews["data"].to_s != "No results"
+          - @vnews["data"].each do |author|
+            %div
+              = link_to(safe_image_tag(author["receiver_author"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "48x48"),author_path(:id => author["receiver_author"]["username"]), :class => "pull-left" )
+              .media-body.newsfeed
+                - if author["type"].to_s.downcase == "FOLLOW"
+              %p{:style=>"height:48px; overflow: auto; font-size:0.9em;"}
+                = link_to author["message"], author_path(author["receiver_author"]["username"])
+                - else 
+                  - if author["opuss"].blank?
+                    %p{:style=>"height:48px; overflow: auto; font-size:0.9em;"}
+                      = link_to author["message"], '#'
+                  - else
+                    %p{:style=>"height:48px; overflow: auto; font-size:0.9em;"}
+                      = link_to author["message"], opuss_path(author["opuss"]["opuss_id"])

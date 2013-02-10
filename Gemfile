@@ -13,6 +13,7 @@ gem 'thin'
 gem 'unicorn'
 gem 'redis'
 gem 'omniauth-singly'
+gem 'haml'
 
 group :development, :test do
   gem 'sqlite3', '1.3.5'
