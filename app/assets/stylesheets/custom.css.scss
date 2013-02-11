@@ -1,5 +1,6 @@
 @import 'bootstrap';
 @import "bootstrap-responsive";
+
 body {
   padding-top: 60px;
 }
@@ -86,6 +87,19 @@ aside {
       margin-bottom: 3px;
     }
   }
+}
+
+
+.pawbutton {
+  display: inline-block;
+  width: 17px;
+  height: 16px;
+  *margin-left: 0;
+  *margin-right: .3em;
+  line-height: 14px;
+  vertical-align: text-top;
+  background-image: url("pawbuttonwhite.png");
+  background-repeat: no-repeat;
 }
 
 .gravatar {
