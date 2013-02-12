@@ -14,6 +14,7 @@ class OpussesController < ApplicationController
 #      puts "the cookie value is #{cookies[:opuss_token]}"
       puts "I've been called for Opusses Index, I'm supplying this cookie: #{cookies[:otoken]}"
       @opusses = OpussApi.feed(cookies[:otoken]).parsed_response
+      sessionerr(@opusses)
       if @opusses["data"].to_s == "No results"
         flash[:error] = "No posts yet."
         redirect_to '/opusses'
@@ -28,6 +29,7 @@ class OpussesController < ApplicationController
 
   def indextop
     @opusses = OpussApi.top_feed(cookies[:otoken]).parsed_response
+    sessionerr(@opusses)
     if @opusses["data"].to_s == "No results"
       flash[:error] = "It's just gone midnight GMT and we're starting a new day. Please try TOP a little later."
       redirect_to '/opusses'
@@ -37,6 +39,7 @@ class OpussesController < ApplicationController
   def authorfeed
     # The only thing avail in controllers are params.  So authorfeed(username) won't work
     @opusses = OpussApi.author_feed(params[:id],cookies[:otoken]).parsed_response
+    sessionerr(@opusses)
     if @opusses["data"].to_s == "No results"
       flash[:error] = "No posts yet."
       redirect_to '/opusses'
@@ -45,10 +48,12 @@ class OpussesController < ApplicationController
 
   def all_opusses
     @opusses = OpussApi.public_feed(cookies[:otoken]).parsed_response
+    sessionerr(@opusses)
   end
 
   def search
     @opusses = OpussApi.search(params[:findopuss],cookies[:otoken]).parsed_response
+    sessionerr(@opusses)
     if @opusses["data"].to_s == "No results"
       flash[:error] = "No results. We're still refining search so please try another query. Thank you."
       redirect_to '/opusses'
@@ -59,8 +64,10 @@ class OpussesController < ApplicationController
     # Show a particular Opuss. =/opusses/id 
     # opuss_path(opuss)
     @opuss = OpussApi.show_opuss(params[:id],cookies[:otoken])
+    sessionerr(@opuss)
     @showedit = cookies[:author_id]
     @comments = OpussApi.view_comments(params[:id],cookies[:otoken]).parsed_response
+    sessionerr(@comments)
     puts "In Opusses SHOW. Check for edit: Here is the author-id I captured during logon #{cookies[:author_id]}"
     # Use this author_id to compare to current author_id in the response object, if the two match
     # Show the "edit this Opuss" button
@@ -75,6 +82,7 @@ class OpussesController < ApplicationController
     # POST the Opuss
     # opusses_path
     @cresponse = OpussApi.create_opuss(params[:opuss][:opuss],params[:opuss][:title],cookies[:otoken])
+    sessionerr(@cresponse)
     if @cresponse["error_code"].to_s !="200"
       flash.now[:error] = 'Failed.  Please make sure your Opuss has content'
       render 'new'
@@ -91,6 +99,7 @@ class OpussesController < ApplicationController
     # The show controller enforces whether to show the control
     # Here we need to prevent a malicious attempt to edit someone elses Opuss 
     @response = OpussApi.show_opuss(params[:id],cookies[:otoken]).parsed_response
+    sessionerr(@response)
     unless @response["data"]["author"]["author_id"].to_s == cookies[:author_id].to_s
       redirect_to root_url, notice: "Tsk Tsk. You can't edit someone elses Opuss"
     end
@@ -102,6 +111,7 @@ class OpussesController < ApplicationController
     # opuss_path(opuss)
     # Post the code here to update :)
     @uresponse = OpussApi.update_opuss(params[:id],params[:opuss][:title],params[:opuss][:opuss],cookies[:otoken])
+    sessionerr(@uresponse)
     if @uresponse["error_code"].to_s !="200"
       flash.now[:error] = 'Failed.  Please make sure your Opuss has content'
       render 'edit'
@@ -117,6 +127,7 @@ class OpussesController < ApplicationController
     # This one could be tricky.. might be useful to refactor the code for show/edit where
     # we verify the user committing the act is the owner of resource.. (eg: Update/Delete)
     @dresponse = OpussApi.destroy_opuss(params[:id],cookies[:otoken])
+    sessionerr(@dresponse)
     if @dresponse["error_code"].to_s !="200"
       flash.now[:error] = 'Failed. Please email support@opuss.com with the OpussID'
       render 'show'
@@ -129,6 +140,7 @@ class OpussesController < ApplicationController
   def like
     puts "In the like method, before I submit, I'm passing: #{params[:like][:like_id]} and #{cookies[:otoken]}"
     @lresponse = OpussApi.like_opuss(params[:like][:like_id],cookies[:otoken])
+    sessionerr(@lresponse)
     puts "in the like method, this is the the response: #{@lresponse["error_code"].to_s}"
     if @lresponse["error_code"].to_s !="200"
       puts @lresponse["data"].to_s
@@ -143,6 +155,7 @@ class OpussesController < ApplicationController
 
   def repost
     @rresponse = OpussApi.repost_opuss(params[:repost][:opuss_id],cookies[:otoken])
+    sessionerr(@rresponse)
     puts "In the repost method, I'm getting: #{@rresponse["error_code"].to_s}"
     puts "The return repost object #{@rresponse}"
     if @rresponse["error_code"].to_s !="200"

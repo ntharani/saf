@@ -22,6 +22,7 @@ include OpussApi
     #Sign in the User.
 #    @author = osign_in(params[:osession][:username],params[:osession][:password])
     @author = OpussApi.logon(params[:osession][:username],params[:osession][:password])
+    sessionerr(@author)
     puts "Back in the Osessions controller"
     puts "Here: #{@author}"
     puts "#{@author["error_code"]} "

@@ -58,6 +58,14 @@ module OsessionsHelper
     end
   end
 
+  def sessionerr(object)
+    puts "checking if the cookie or session is wierd, if so will kill it. The object error_code is: #{object["error_code"]}"
+    if object["error_code"].to_s == "-500"
+      self.ocurrent_user = nil
+      redirect_to ssign_path
+    end
+  end
+
 end
 
 

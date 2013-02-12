@@ -8,12 +8,14 @@ class AuthorsController < ApplicationController
     # the Authors feed =/authors
     puts "I'm in the AuthorsController"
       @authors = OpussApi.public_feed(cookies[:otoken]).parsed_response
+      sessionerr(@authors)
   end
 
   def show
     # Show a particular Author. =/authors/id 
     # author_path(author)
     @author = OpussApi.show_author(params[:id],cookies[:otoken])
+    sessionerr(@author)
     puts "Received author object: #{@author}"
     puts @author
     puts "In Opusses SHOW. Check for edit: Here is the author-id I captured during logon #{cookies[:author_id]}"
@@ -22,11 +24,14 @@ class AuthorsController < ApplicationController
     @showedit = cookies[:author_id]
     if @showedit.to_s == @author["data"]["author_id"].to_s
       @news = OpussApi.author_news(cookies[:otoken])
+      sessionerr(@news)
       @liked = OpussApi.author_liked(cookies[:otoken])
+      sessionerr(@liked)
     else
       @liked = OpussApi.author_liked(cookies[:otoken])
-
+      sessionerr(@liked)
       @vnews = OpussApi.vauthor_news(@author["data"]["username"],cookies[:otoken])
+      sessionerr(@vnews)
     end
   end
 
@@ -49,6 +54,7 @@ class AuthorsController < ApplicationController
     end
       
     @bresponse = OpussApi.username(params[:author][:username]).parsed_response
+    sessionerr(@bresponse)
     puts @bresponse
     if @bresponse["error_code"].to_s == "200"
       puts "It's available"
@@ -58,9 +64,11 @@ class AuthorsController < ApplicationController
     end
 
     @cresponse = OpussApi.author_register(params[:author][:username],params[:author][:email].downcase,params[:author][:password])
+    sessionerr(@cresponse)
     if @cresponse["error_code"].to_s == "200"
       puts "Wahey! you're in!"
       @author = OpussApi.logon(params[:author][:username],params[:author][:password])
+      sessionerr(@author)
       if @author["error_code"].to_s != "200"
         flash.now[:error] = 'Invalid username or password'
         render ologin_path and return
@@ -77,6 +85,7 @@ class AuthorsController < ApplicationController
 
   def edit
     @response = OpussApi.show_author(params[:id],cookies[:otoken])
+    sessionerr(@response)
     unless @response["data"]["author_id"].to_s == cookies[:author_id].to_s
       redirect_to root_url, notice: "Tsk Tsk. You can't edit someone elses profile"
     end
@@ -86,6 +95,7 @@ class AuthorsController < ApplicationController
   def update
     # This screen will update the Authors profile.
     @uresponse = OpussApi.author_edit(params[:author][:name],params[:author][:email],params[:author][:bio],cookies[:otoken])
+    sessionerr(@uresponse)
     if @uresponse["error_code"].to_s !="200"
       flash.now[:error] = 'Failed.  Please make sure your profile has content'
       render 'edit'
@@ -100,15 +110,18 @@ class AuthorsController < ApplicationController
 
   def following
     @author = OpussApi.author_following(params[:id],cookies[:otoken]).parsed_response
+    sessionerr(@author)
   end
 
   def followed
     @author = OpussApi.author_followers(params[:id],cookies[:otoken]).parsed_response
+    sessionerr(@author)
   end
 
   def follow
     store_location
     @fresponse = OpussApi.author_follow(params[:follow][:follow_id],cookies[:otoken])
+    sessionerr(@fresponse)
     if @fresponse["error_code"].to_s !="200"
       puts @lresponse["data"].to_s
       flash[:error] = 'Failed. Please email support@opuss.com with the OpussID'
@@ -123,6 +136,7 @@ class AuthorsController < ApplicationController
   def start_follow
     store_location
     @fresponse = OpussApi.author_follow(params[:follow][:follow_id],cookies[:otoken])
+    sessionerr(@fresponse)
     if @fresponse["error_code"].to_s !="200"
       puts @lresponse["data"].to_s
       flash[:error] = 'Failed. Please email support@opuss.com with the OpussID'
@@ -138,6 +152,7 @@ class AuthorsController < ApplicationController
 
   def start
     @sresponse = OpussApi.suggest(cookies[:otoken])
+    sessionerr(@sresponse)
   end
 
 
