@@ -151,7 +151,7 @@ class AuthorsController < ApplicationController
 #     unless OpussApi.osigned_in?
       unless oosigned_in?
         store_location
-        redirect_to new_osession_path, notice: "Please sign in first." 
+        redirect_to ssign_path, notice: "Please sign in first." 
       end
     end
 

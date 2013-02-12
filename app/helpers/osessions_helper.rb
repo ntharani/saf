@@ -1,12 +1,30 @@
 module OsessionsHelper
 
-  def oosign_in(ouser)
-      puts "I'm in the OSESSIONS HELPER"
+  def oosign_in(ouser, type)
+    puts "I'm in the OSESSIONS HELPER"
+    if type.to_s == 'newlogin'
+      puts "I'm of type: NEWLOGIN"
       cookies.permanent[:otoken] = ouser["data"]["session_token"]
       cookies.permanent[:username] = ouser["data"]["author"]["username"]
       cookies.permanent[:author_id] = ouser["data"]["author"]["author_id"]
-      puts "In the OSESSIONS helper, the cookie is: #{cookies[:otoken]}"
-      self.ocurrent_user = ouser
+      puts "If there is a access_token, this is it: #{session[:access_token]}"
+
+      if session[:access_token]
+        #redis code to make association here
+        puts "A access token exists, so I'm about to set Redis data. otoken fwiw is #{cookies[:otoken]}"
+        REDIS.hset('singly:opuss', cookies[:singly_id], cookies[:username])
+        REDIS.hset('opuss:users', cookies[:username], cookies[:otoken] )
+      end
+    end
+
+    if type.to_s == 'redisauthor'
+      # cookies.permanent[:otoken] is set in the redis method.
+      cookies.permanent[:username] = ouser["data"]["username"]
+      cookies.permanent[:author_id] = ouser["data"]["author_id"]
+    end
+
+    puts "At the end of the OSESSIONS helper, the cookie is: #{cookies[:otoken]}"
+    self.ocurrent_user = ouser
   end
 
   def oosigned_in?
@@ -32,6 +50,12 @@ module OsessionsHelper
     OpussApi.logoff(cookies[:otoken])
     cookies.delete(:otoken)
     cookies.delete(:username)
+    if session[:access_token]
+      #delete the Redis Reference explicitly
+      REDIS.hdel('singly:opuss',session[:access_token])
+      cookies.delete(:singly_id)
+      session.clear
+    end
   end
 
 end

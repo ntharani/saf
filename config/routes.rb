@@ -42,6 +42,7 @@ Saf::Application.routes.draw do
   match 'auth/:service',          to: 'auth#service'
   match 'auth/:service/callback', to: 'auth#callback'
   match 'logout',                 to: 'auth#logout'
+  match 'ssign',                  to: 'osessions#ssign'
 
 
 
