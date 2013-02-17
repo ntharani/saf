@@ -73,7 +73,7 @@ class AuthorsController < ApplicationController
         flash.now[:error] = 'Invalid username or password'
         render ologin_path and return
       end
-      oosign_in(@author)
+      oosign_in(@author,'newlogin')
       flash[:success] = "Welcome to Opuss!"
       redirect_to start_path
     else
