@@ -5,9 +5,9 @@
 -# @news
 
 
-.container
+.profilecontainer
   
-  .row{:style => "height:100px; overflow: hidden;" }
+  .row-fluid{:style => "height:100px; overflow: hidden;" }
     %div
       = safe_image_tag(@author["data"]["avatar_url"], alt: "Avatar", class: "gravatar", size: "72x72")
     %div

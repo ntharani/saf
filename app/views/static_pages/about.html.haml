@@ -1,1 +1,9 @@
 = provide(:title, 'About')
+  .row-fluid.feed
+    -if opuss["isRepost"].to_s.downcase == 'true'
+      %div{:style => "position:absolute;z-index:0;"}
+      = link_to(safe_image_tag(opuss["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64"),author_path(:id => opuss["author"]["username"]), :class => "pull-left" )
+    %div{:style=> "position:absolute;z-index:1;bottom:-2px;right:-2px;"}
+      = link_to(safe_image_tag(opuss["reposter"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "32x32"), author_path(:id => opuss["author"]["username"]), :class => "pull-left" )
+    -else
+      = link_to(safe_image_tag(opuss["author"]["avatar_url"], alt: "Avatar", class: "pull-left", size: "64x64"),author_path(:id => opuss["author"]["username"]), :class => "pull-left" )

@@ -143,7 +143,7 @@ class AuthorsController < ApplicationController
       redirect_to author_path(params[:follow][:follow_id])
     else
       flash[:success] = 'Done!'
-      redirect_to start_path
+      redirect_to author_path(params[:follow][:follow_id])
     end    
 
   end

@@ -3,9 +3,8 @@
 
 <% @opusses["data"].each do |opuss| %>
 
-<div class="container">
   
-  <div class="row">
+  <div class="row-fluid feed">
 
 
     <% if opuss["isRepost"].to_s.downcase == 'true' %>
@@ -23,8 +22,11 @@
 
     <% if opuss["author"]["username"].to_s.downcase == 'opuss' %>
     <% else %>
-      <div><%= link_to(opuss_comments_path(opuss["opuss_id"]), :method => :get, class: "btn btn-large pull-right indexfeed") do %>
-        <i class="icon-comment"></i>&nbsp;&nbsp;&nbsp; <%= opuss["numberOfComments"] %>
+      <div style="background-color:#999333;">k
+      </div>
+      <div>
+        <%= link_to(opuss_comments_path(opuss["opuss_id"]), :method => :get, class: "btn btn-large pull-right indexfeed") do %>
+          <i class="icon-comment"></i>&nbsp;&nbsp;&nbsp; <%= opuss["numberOfComments"] %>
         <% end %>
       </div>
       <% if opuss["isLiked"].to_s != 'true' %>
@@ -39,7 +41,7 @@
     <% end %>
   </div>
 
-  <div class="row indexfeedtext">
+  <div class="row-fluid indexfeedtext">
   <br >
   <div style="margin-top:5px;margin-bottom:5px;">
         <strong><%= link_to opuss["title"], opuss_path(:id => opuss["opuss_id"]) %></strong>
@@ -59,9 +61,6 @@
         <i class="icon-retweet pull-right"></i>
     <% end %>
   </div>
-
-
-</div>
 
 </div>
 
