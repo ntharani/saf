@@ -1,0 +1,8 @@
+= form_for(:like, :url => like_opuss_path(opuss["opuss_id"]), :html => { :method => 'post' }, :remote => true ) do |f|
+  = f.hidden_field :like_id, :value => opuss["opuss_id"]
+  = f.hidden_field :likeindex, :value => i  
+  = f.hidden_field :opuss, :value => opuss  
+  = button_tag(type: 'submit', class: "btn btn-large pull-right indexfeed") do
+    <i class="icon-heart"></i>
+    &nbsp;&nbsp;&nbsp;
+    =opuss["numberOfLikes"]

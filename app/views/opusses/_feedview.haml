@@ -1,4 +1,5 @@
--@opusses["data"].each do |opuss|
+-@opusses["data"].each.with_index do |opuss,i|
+
   .opussbox.headbit
     .row-fluid{:style=>"max-height:200px; min-height:80px; overflow: hidden;"}
       -if opuss["isRepost"].to_s.downcase == 'true'
@@ -17,19 +18,14 @@
           =link_to(opuss_comments_path(opuss["opuss_id"]), :method => :get, class: "btn btn-large pull-right indexfeed") do
             <i class="icon-comment"></i>&nbsp;&nbsp;&nbsp;
             =opuss["numberOfComments"]
+     
+      %div{:id => "like_#{i}"}
+        -if opuss["isLiked"].to_s != 'true'
+          =render :partial => 'like', :locals => {opuss: opuss, i: i}
+        -else
+          =render :partial => 'disablelike', :locals => {opuss: opuss, i: i}
 
-      -if opuss["isLiked"].to_s != 'true'
-        = form_for(:like, :url => like_opuss_path(opuss["opuss_id"]), :html => { :method => 'post' } ) do |f|
-          = f.hidden_field :like_id, :value => opuss["opuss_id"]
-          = button_tag(type: 'submit', class: "btn btn-large pull-right indexfeed") do
-            <i class="icon-heart"></i>
-            &nbsp;&nbsp;&nbsp;
-            =opuss["numberOfLikes"]
-      -else
-        =button_tag(type: 'submit', class: "btn btn-large pull-right indexfeed disabled") do
-          <i class="icon-heart"></i>
-          &nbsp;&nbsp;&nbsp;
-          =opuss["numberOfLikes"]
+  
   .opussbox.bottombit
     .row-fluid.indexfeedtext
       %strong

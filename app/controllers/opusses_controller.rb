@@ -142,13 +142,21 @@ class OpussesController < ApplicationController
     @lresponse = OpussApi.like_opuss(params[:like][:like_id],cookies[:otoken])
     sessionerr(@lresponse)
     puts "in the like method, this is the the response: #{@lresponse["error_code"].to_s}"
+    @opuss = OpussApi.show_opuss(params[:id], cookies[:otoken])
+    
     if @lresponse["error_code"].to_s !="200"
       puts @lresponse["data"].to_s
       flash[:error] = 'Failed. Please email support@opuss.com with the OpussID'
       redirect_to '/opusses'
     else
-      flash[:success] = 'Liked!'
-      redirect_to '/opusses'
+      #flash[:success] = 'Liked!'
+      #redirect_to '/opusses'
+
+      respond_to do |format|
+        format.html { redirect_to opusses_path }
+        format.js 
+      end
+
     end
   end    
 

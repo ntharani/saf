@@ -1,0 +1,1 @@
+$("#like_<%=params[:likeindex] %>").html("<%= escape_javascript(render(:partial => 'disablelike', :locals => {opuss: @opuss} )) %>")
