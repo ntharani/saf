@@ -139,10 +139,12 @@ class OpussesController < ApplicationController
 
   def like
     puts "In the like method, before I submit, I'm passing: #{params[:like][:like_id]} and #{cookies[:otoken]}"
-    @lresponse = OpussApi.like_opuss(params[:like][:like_id],cookies[:otoken])
+    @lresponse = OpussApi.like_opuss(params[:id],cookies[:otoken])
     sessionerr(@lresponse)
     puts "in the like method, this is the the response: #{@lresponse["error_code"].to_s}"
-    @opuss = OpussApi.show_opuss(params[:id], cookies[:otoken])
+    @opuss = OpussApi.show_opuss(params[:id], cookies[:otoken]).parsed_response["data"]
+    puts "this is the specific opuss object: #{@opuss}"
+    @likeindex = params[:like][:likeindex]
     
     if @lresponse["error_code"].to_s !="200"
       puts @lresponse["data"].to_s
